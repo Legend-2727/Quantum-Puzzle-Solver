@@ -147,7 +147,7 @@ The application will be available at `http://localhost:8501`
 ```txt
 # Core quantum computing framework
 qiskit==1.0.2
-qiskit-aer==0.13.3
+qiskit-aer==0.12.0
 
 # Web application framework
 streamlit==1.33.0
@@ -155,10 +155,36 @@ streamlit==1.33.0
 # Scientific computing and visualization
 numpy==1.26.4
 matplotlib==3.8.3
+plotly==6.2.0
 
 # Additional dependencies for Qiskit
-qiskit-ibm-runtime==0.20.2
-qiskit-visualization==0.1.0
+pylatexenc==2.10
+```
+
+### Alternative: requirements_deployment.txt
+If the main requirements.txt fails, try using `requirements_deployment.txt` which contains more conservative version ranges:
+
+```txt
+# Deployment-optimized requirements
+qiskit>=1.0.0,<1.1.0
+qiskit-aer>=0.11.0,<0.13.0
+streamlit>=1.30.0,<1.34.0
+numpy>=1.24.0,<1.27.0
+matplotlib>=3.6.0,<3.9.0
+plotly>=5.0.0,<6.3.0
+pylatexenc>=2.10,<3.0
+```
+
+### System Dependencies: packages.txt
+For platforms that support system-level dependencies, include `packages.txt`:
+
+```txt
+libblas-dev
+liblapack-dev
+libopenblas-dev
+build-essential
+cmake
+python3-dev
 ```
 
 ### .streamlit/config.toml (Optional)
@@ -192,6 +218,13 @@ enableCORS = false
    - Check build logs for specific error messages
    - Verify file paths and names
    - Ensure all files are committed to Git
+
+4. **qiskit-aer BLAS Library Errors**
+   - **Error**: `Could NOT find BLAS (missing: BLAS_LIBRARIES)`
+   - **Solution 1**: Use `requirements_deployment.txt` instead of `requirements.txt`
+   - **Solution 2**: Add `packages.txt` with system dependencies
+   - **Solution 3**: Try downgrading qiskit-aer to version 0.11.0 or 0.10.0
+   - **Solution 4**: Use a pre-compiled qiskit-aer wheel if available
 
 ### Platform-Specific Issues
 

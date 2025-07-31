@@ -1,0 +1,16 @@
+# System-level dependencies for Quantum Puzzle Solver
+# These are required for qiskit-aer compilation on some deployment platforms
+
+# BLAS and LAPACK libraries (required for qiskit-aer)
+libblas-dev
+liblapack-dev
+
+# Additional numerical libraries
+libopenblas-dev
+
+# Build tools (if needed)
+build-essential
+cmake
+
+# Python development headers
+python3-dev 
