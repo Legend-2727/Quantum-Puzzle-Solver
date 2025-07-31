@@ -401,8 +401,8 @@ def solve_graph_coloring():
     # Sidebar controls for graph coloring
     st.sidebar.header("⚙️ Graph Coloring Settings")
     graph_type = st.sidebar.selectbox("Graph Type", [
-        "Triangle (K3)", "Square Cycle", "Pentagon Cycle", "Complete K4", 
-        "Complete K5", "Bipartite K2,3", "Wheel W4", "Star S5", "Complex 6-Node"
+        "Triangle (K3)", "Square Cycle", "Pentagon Cycle", "Hexagon Cycle",
+        "Complete K4", "Complete K5", "Bipartite K2,3", "Wheel W4", "Star S5", "Complex Mixed"
     ], index=1)
     num_colors = st.sidebar.selectbox("Number of Colors", [2, 3, 4, 5], index=1)
     shots = st.sidebar.slider("Quantum Shots", min_value=500, max_value=2000, value=1000, step=100)
@@ -420,12 +420,13 @@ def solve_graph_coloring():
         "Triangle (K3)": {"vertices": 3, "edges": [(0,1), (1,2), (2,0)], "chromatic": 3},
         "Square Cycle": {"vertices": 4, "edges": [(0,1), (1,2), (2,3), (3,0)], "chromatic": 2},
         "Pentagon Cycle": {"vertices": 5, "edges": [(0,1), (1,2), (2,3), (3,4), (4,0)], "chromatic": 3},
+        "Hexagon Cycle": {"vertices": 6, "edges": [(0,1), (1,2), (2,3), (3,4), (4,5), (5,0)], "chromatic": 2},
         "Complete K4": {"vertices": 4, "edges": [(0,1), (0,2), (0,3), (1,2), (1,3), (2,3)], "chromatic": 4},
         "Complete K5": {"vertices": 5, "edges": [(i,j) for i in range(5) for j in range(i+1,5)], "chromatic": 5},
         "Bipartite K2,3": {"vertices": 5, "edges": [(0,2), (0,3), (0,4), (1,2), (1,3), (1,4)], "chromatic": 2},
         "Wheel W4": {"vertices": 5, "edges": [(0,1), (1,2), (2,3), (3,4), (4,1), (0,2), (0,3), (0,4)], "chromatic": 4},
         "Star S5": {"vertices": 6, "edges": [(0,1), (0,2), (0,3), (0,4), (0,5)], "chromatic": 2},
-        "Complex 6-Node": {"vertices": 6, "edges": [(0,1), (1,2), (2,3), (3,4), (4,5), (5,0), (0,3), (1,4), (2,5)], "chromatic": 3}
+        "Complex Mixed": {"vertices": 6, "edges": [(0,1), (1,2), (2,3), (3,4), (4,5), (5,0), (0,3), (1,4)], "chromatic": 3}
     }
     
     graph = graphs[graph_type]
