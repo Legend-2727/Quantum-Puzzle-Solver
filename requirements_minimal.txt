@@ -1,8 +1,6 @@
 # Minimal requirements for deployment - Python 3.13+ compatible
 streamlit>=1.30.0
 numpy>=1.26.0
-matplotlib>=3.8.0
-plotly>=6.0.0
 
 # Qiskit with fallback handling in the app
 qiskit>=1.0.0 
