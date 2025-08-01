@@ -2,7 +2,7 @@
 # Conservative versions that are known to work well
 
 # Core quantum computing framework
-qiskit==1.0.2
+qiskit==0.44.0
 qiskit-aer==0.12.0
 
 # Web application framework
