@@ -1,10 +1,19 @@
 import streamlit as st
 import numpy as np
 import time
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 import pandas as pd
 from qiskit.primitives import Sampler
+
+# Import matplotlib with error handling for deployment environments
+try:
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as patches
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    st.warning("⚠️ Matplotlib not available. Some visualizations may be limited.")
+    MATPLOTLIB_AVAILABLE = False
+    plt = None
+    patches = None
 
 # Import our enhanced solver
 try:
@@ -22,6 +31,14 @@ st.set_page_config(
 
 def create_chessboard_visualization(board, n, title="Current Board State", show_validation=True, is_valid=None):
     """Create a chessboard visualization using matplotlib"""
+    if not MATPLOTLIB_AVAILABLE:
+        st.error("Matplotlib is not available. Cannot display chessboard visualization.")
+        return None
+
+    if plt is None or patches is None:
+        st.error("Matplotlib components not available.")
+        return None
+
     fig, ax = plt.subplots(figsize=(8, 8))
     
     # Create chessboard
@@ -584,6 +601,14 @@ def solve_graph_coloring():
 
 def create_graph_visualization(graph, coloring, title="Graph", is_valid=None):
     """Create a graph visualization using matplotlib"""
+    if not MATPLOTLIB_AVAILABLE:
+        st.error("Matplotlib is not available. Cannot display graph visualization.")
+        return None
+
+    if plt is None or patches is None:
+        st.error("Matplotlib components not available.")
+        return None
+
     fig, ax = plt.subplots(figsize=(8, 8))
     
     vertices = graph['vertices']
@@ -1133,6 +1158,14 @@ def generate_quantum_dataset(dataset_type):
 
 def create_data_visualization(X, y, title, info):
     """Create enhanced visualization of the dataset with educational annotations"""
+    if not MATPLOTLIB_AVAILABLE:
+        st.error("Matplotlib is not available. Cannot display data visualization.")
+        return None
+
+    if plt is None:
+        st.error("Matplotlib components not available.")
+        return None
+
     fig, ax = plt.subplots(figsize=(10, 7))
     
     # Plot data points with enhanced styling
@@ -1193,6 +1226,14 @@ def simulate_qsvm_training(X, y, feature_map, shots):
 
 def create_classification_visualization(X, y, support_vectors, decision_boundary, title):
     """Create enhanced visualization of QSVM classification results with educational annotations"""
+    if not MATPLOTLIB_AVAILABLE:
+        st.error("Matplotlib is not available. Cannot display classification visualization.")
+        return None
+
+    if plt is None:
+        st.error("Matplotlib components not available.")
+        return None
+
     fig, ax = plt.subplots(figsize=(12, 8))
     
     xx, yy = decision_boundary
