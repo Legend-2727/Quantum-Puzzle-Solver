@@ -1,6 +1,0 @@
-libblas-dev
-liblapack-dev
-libopenblas-dev
-build-essential
-cmake
-python3-dev 

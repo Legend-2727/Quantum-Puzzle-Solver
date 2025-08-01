@@ -261,7 +261,7 @@ def main():
     # Add problem selection
     problem_type = st.selectbox(
         "🎯 Choose Quantum Problem to Solve:",
-        ["N-Queens Problem", "Graph Coloring Problem", "Quantum Machine Learning (QSVM)"],
+        ["N-Queens Problem", "Graph Coloring Problem", "Quantum Machine Learning (QSVM)", "Deutsch-Jozsa Algorithm"],
         index=0
     )
     
@@ -269,6 +269,8 @@ def main():
         solve_n_queens()
     elif problem_type == "Graph Coloring Problem":
         solve_graph_coloring()
+    elif problem_type == "Deutsch-Jozsa Algorithm":
+        solve_deutsch_jozsa()
     else:
         solve_quantum_ml()
 
@@ -1325,6 +1327,240 @@ def create_classification_visualization(X, y, support_vectors, decision_boundary
     
     plt.tight_layout()
     return fig
+
+def solve_deutsch_jozsa():
+    """Solve and demonstrate the Deutsch-Jozsa algorithm"""
+    st.header("🔬 Deutsch-Jozsa Algorithm Simulator")
+    st.markdown("""
+    The **Deutsch-Jozsa algorithm** is one of the first quantum algorithms that demonstrated 
+    quantum advantage over classical computing. It can determine if a function is **constant** 
+    or **balanced** in just **one query**, while classical algorithms need up to **2^(n-1) + 1** queries!
+    """)
+    
+    # Algorithm explanation
+    with st.expander("📚 How Deutsch-Jozsa Works", expanded=False):
+        st.markdown("""
+        ### The Problem
+        Given a function f: {0,1}^n → {0,1}, determine if it's:
+        - **Constant**: f(x) = 0 for all x OR f(x) = 1 for all x
+        - **Balanced**: f(x) = 0 for exactly half the inputs, f(x) = 1 for the other half
+        
+        ### Classical vs Quantum
+        - **Classical**: Need up to 2^(n-1) + 1 queries to be certain
+        - **Quantum**: Only 1 query needed!
+        
+        ### Quantum Advantage
+        The quantum algorithm uses superposition and interference to check all possible inputs simultaneously.
+        """)
+    
+    # Function selection
+    st.subheader("🎯 Select Function Type")
+    function_type = st.selectbox(
+        "Choose the type of function to test:",
+        ["Constant (All 0s)", "Constant (All 1s)", "Balanced (Alternating)", "Balanced (Random)"],
+        help="Select different function types to see how Deutsch-Jozsa distinguishes them"
+    )
+    
+    # Number of qubits
+    n_qubits = st.slider("Number of input qubits:", 1, 4, 2, help="More qubits = bigger quantum advantage")
+    
+    # Create the function
+    def create_function(func_type, n):
+        """Create a function based on the selected type"""
+        if func_type == "Constant (All 0s)":
+            return lambda x: 0
+        elif func_type == "Constant (All 1s)":
+            return lambda x: 1
+        elif func_type == "Balanced (Alternating)":
+            return lambda x: x.count('1') % 2  # Parity function
+        else:  # Balanced (Random)
+            # Create a balanced function by setting first half to 0, second half to 1
+            total_inputs = 2**n
+            half = total_inputs // 2
+            def balanced_func(x):
+                x_int = int(x, 2)
+                return 1 if x_int >= half else 0
+            return balanced_func
+    
+    # Create the quantum circuit
+    def create_deutsch_jozsa_circuit(f, n):
+        """Create Deutsch-Jozsa quantum circuit"""
+        from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
+        
+        # Create registers
+        input_qubits = QuantumRegister(n, 'x')
+        output_qubit = QuantumRegister(1, 'y')
+        classical_bits = ClassicalRegister(n, 'c')
+        
+        circuit = QuantumCircuit(input_qubits, output_qubit, classical_bits)
+        
+        # Initialize output qubit to |1⟩
+        circuit.x(output_qubit)
+        circuit.h(output_qubit)
+        
+        # Apply Hadamard to all input qubits
+        circuit.h(input_qubits)
+        
+        # Apply the oracle (function)
+        circuit.barrier()
+        circuit.append(create_oracle(f, n), input_qubits[:] + output_qubit[:])
+        circuit.barrier()
+        
+        # Apply Hadamard to input qubits again
+        circuit.h(input_qubits)
+        
+        # Measure input qubits
+        circuit.measure(input_qubits, classical_bits)
+        
+        return circuit
+    
+    def create_oracle(f, n):
+        """Create quantum oracle for the function f"""
+        from qiskit import QuantumCircuit
+        
+        oracle = QuantumCircuit(n + 1)
+        
+        # For each possible input
+        for i in range(2**n):
+            input_str = format(i, f'0{n}b')
+            output = f(input_str)
+            
+            if output == 1:
+                # Apply X gates to create the input pattern
+                for j, bit in enumerate(input_str):
+                    if bit == '0':
+                        oracle.x(j)
+                
+                # Apply multi-controlled X gate
+                control_qubits = list(range(n))
+                oracle.mcx(control_qubits, n)
+                
+                # Uncompute the X gates
+                for j, bit in enumerate(input_str):
+                    if bit == '0':
+                        oracle.x(j)
+        
+        return oracle
+    
+    # Create function and circuit
+    f = create_function(function_type, n_qubits)
+    circuit = create_deutsch_jozsa_circuit(f, n_qubits)
+    
+    # Display function table
+    st.subheader("📊 Function Truth Table")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("**Input** | **Output**")
+        st.markdown("--- | ---")
+        for i in range(2**n_qubits):
+            input_str = format(i, f'0{n_qubits}b')
+            output = f(input_str)
+            st.markdown(f"`{input_str}` | `{output}`")
+    
+    with col2:
+        # Determine function type
+        outputs = [f(format(i, f'0{n_qubits}b')) for i in range(2**n_qubits)]
+        unique_outputs = set(outputs)
+        
+        if len(unique_outputs) == 1:
+            func_type = "Constant"
+            color = "🟢"
+        else:
+            func_type = "Balanced"
+            color = "🟡"
+        
+        st.markdown(f"**Function Type:** {color} {func_type}")
+        st.markdown(f"**Unique outputs:** {len(unique_outputs)}")
+        st.markdown(f"**Total inputs:** {2**n_qubits}")
+    
+    # Simulate the quantum circuit
+    st.subheader("⚛️ Quantum Simulation")
+    
+    if st.button("🚀 Run Deutsch-Jozsa Algorithm", type="primary"):
+        with st.spinner("Running quantum simulation..."):
+            try:
+                # Run the circuit
+                sampler = Sampler()
+                job = sampler.run(circuit, shots=1000)
+                result = job.result()
+                quasi_dists = result.quasi_dists[0]
+                
+                # Convert to counts
+                counts = {}
+                for bitstring, probability in quasi_dists.items():
+                    counts[str(bitstring)] = int(probability * 1000)
+                
+                # Display results
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.markdown("**📈 Measurement Results**")
+                    for bitstring, count in sorted(counts.items(), key=lambda x: x[1], reverse=True):
+                        percentage = (count / 1000) * 100
+                        st.markdown(f"`{bitstring}`: {count} ({percentage:.1f}%)")
+                
+                with col2:
+                    st.markdown("**🎯 Algorithm Result**")
+                    
+                    # Check if all measured states are |0⟩^n
+                    all_zeros = all(bitstring.startswith('0' * n_qubits) for bitstring in counts.keys())
+                    
+                    if all_zeros:
+                        st.success("🎉 **RESULT: Function is CONSTANT**")
+                        st.markdown("All measurements returned |0⟩^n")
+                    else:
+                        st.warning("🎯 **RESULT: Function is BALANCED**")
+                        st.markdown("Some measurements returned non-zero states")
+                    
+                    # Classical vs Quantum comparison
+                    st.markdown("**⚡ Quantum Advantage**")
+                    classical_queries = 2**(n_qubits-1) + 1
+                    quantum_queries = 1
+                    speedup = classical_queries / quantum_queries
+                    st.markdown(f"Classical queries needed: **{classical_queries}**")
+                    st.markdown(f"Quantum queries needed: **{quantum_queries}**")
+                    st.markdown(f"Speedup: **{speedup:.0f}x faster!**")
+                
+                # Circuit visualization
+                st.subheader("🔧 Quantum Circuit")
+                if MATPLOTLIB_AVAILABLE:
+                    try:
+                        fig = circuit.draw(output='mpl', style='clifford')
+                        st.pyplot(fig)
+                    except:
+                        st.code(str(circuit))
+                else:
+                    st.code(str(circuit))
+                
+                # Educational explanation
+                st.subheader("🧠 How It Works")
+                st.markdown("""
+                ### The Magic of Quantum Superposition
+                1. **Initialize**: Put input qubits in superposition of all possible inputs
+                2. **Oracle**: Apply the function as a quantum oracle
+                3. **Interference**: Hadamard gates create interference patterns
+                4. **Measurement**: Result reveals function type instantly!
+                
+                ### Why It's Fast
+                - **Classical**: Must check inputs one by one
+                - **Quantum**: Checks all inputs simultaneously using superposition
+                - **Interference**: Destructive interference eliminates wrong answers
+                """)
+                
+            except Exception as e:
+                st.error(f"Simulation failed: {e}")
+                st.info("This might be due to the MockSampler being used. Try with a full Qiskit installation for complete functionality.")
+    
+    # Interactive demonstration
+    st.subheader("🎮 Interactive Demonstration")
+    st.markdown("""
+    **Try different function types and qubit counts to see the quantum advantage!**
+    
+    - **Constant functions**: Always return the same output
+    - **Balanced functions**: Return 0 for half inputs, 1 for other half
+    - **More qubits**: Bigger speedup over classical algorithms
+    """)
 
 if __name__ == "__main__":
     main() 
