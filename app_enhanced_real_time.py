@@ -65,7 +65,7 @@ except ImportError:
 
 # Set page config
 st.set_page_config(
-    page_title="Quantum N-Queens Solver",
+    page_title="Quantum Playground",
     page_icon="👑",
     layout="wide"
 )
