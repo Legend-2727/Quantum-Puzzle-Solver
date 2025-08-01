@@ -30,7 +30,11 @@ try:
                             def result(self):
                                 class MockResult:
                                     def __init__(self):
-                                        self.quasi_dists = [{0: 1.0}]
+                                        # For Deutsch-Jozsa, return realistic results
+                                        # Constant functions should return all zeros
+                                        # Balanced functions should return non-zero states
+                                        # This is a simplified mock - real implementation would be more complex
+                                        self.quasi_dists = [{0: 1.0}]  # Default to constant function result
                                 return MockResult()
                         return MockJob(circuit, shots)
                 Sampler = MockSampler
@@ -1517,13 +1521,19 @@ def solve_deutsch_jozsa():
                     st.markdown("**🎯 Algorithm Result**")
                     
                     # Check if all measured states are |0⟩^n
-                    all_zeros = all(bitstring.startswith('0' * n_qubits) for bitstring in counts.keys())
+                    # For 1 qubit: check if all measurements are '0'
+                    # For 2+ qubits: check if all measurements start with '0' repeated n_qubits times
+                    if n_qubits == 1:
+                        all_zeros = all(bitstring == '0' for bitstring in counts.keys())
+                    else:
+                        all_zeros = all(bitstring.startswith('0' * n_qubits) for bitstring in counts.keys())
                     
                     # Debug information
                     st.markdown("**🔍 Debug Info:**")
                     st.markdown(f"Function type from truth table: **{func_type}**")
                     st.markdown(f"All measurements are zeros: **{all_zeros}**")
                     st.markdown(f"Measured states: {list(counts.keys())}")
+                    st.markdown(f"Number of qubits: **{n_qubits}**")
                     
                     if all_zeros:
                         st.success("🎉 **RESULT: Function is CONSTANT**")
