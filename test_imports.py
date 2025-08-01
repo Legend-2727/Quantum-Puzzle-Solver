@@ -37,7 +37,17 @@ def test_imports():
         return False
     
     try:
-        from qiskit.primitives import Sampler
+        # Try different import paths for different Qiskit versions
+        try:
+            from qiskit.primitives import Sampler
+            print("✅ qiskit.primitives.Sampler imported successfully")
+        except ImportError:
+            try:
+                from qiskit.algorithms import Sampler
+                print("✅ qiskit.algorithms.Sampler imported successfully")
+            except ImportError:
+                from qiskit import Sampler
+                print("✅ qiskit.Sampler imported successfully")
         print("✅ qiskit imported successfully")
     except ImportError as e:
         print(f"❌ qiskit import failed: {e}")

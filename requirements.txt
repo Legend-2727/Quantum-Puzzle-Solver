@@ -1,6 +1,7 @@
 # Core quantum computing framework
 qiskit>=1.0.0,<1.1.0
 qiskit-aer>=0.11.0,<0.13.0
+qiskit-primitives>=0.1.0
 
 # Web application framework
 streamlit>=1.30.0,<1.34.0

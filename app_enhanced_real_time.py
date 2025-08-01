@@ -2,7 +2,21 @@ import streamlit as st
 import numpy as np
 import time
 import pandas as pd
-from qiskit.primitives import Sampler
+
+# Import Qiskit with error handling for deployment environments
+try:
+    # Try different import paths for different Qiskit versions
+    try:
+        from qiskit.primitives import Sampler
+    except ImportError:
+        try:
+            from qiskit.algorithms import Sampler
+        except ImportError:
+            from qiskit import Sampler
+    QISKIT_AVAILABLE = True
+except ImportError:
+    st.error("❌ Qiskit not available. This app requires Qiskit to run.")
+    st.stop()
 
 # Import matplotlib with error handling for deployment environments
 try:

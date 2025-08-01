@@ -6,11 +6,27 @@ and Grover's algorithm for solving the N-Queens puzzle.
 
 import numpy as np
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
-from qiskit.primitives import Sampler
 from qiskit.circuit.library import PhaseOracle
 from qiskit.visualization import plot_histogram
-import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
+
+# Import Qiskit Sampler with fallback options
+try:
+    from qiskit.primitives import Sampler
+except ImportError:
+    try:
+        from qiskit.algorithms import Sampler
+    except ImportError:
+        from qiskit import Sampler
+
+# Import matplotlib with error handling
+try:
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    MATPLOTLIB_AVAILABLE = False
+    plt = None
+    Rectangle = None
 
 class NQueensQuantumSolver:
     """
