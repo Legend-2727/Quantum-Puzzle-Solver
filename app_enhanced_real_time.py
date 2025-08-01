@@ -34,6 +34,7 @@ try:
                                         # Constant functions should return all zeros
                                         # Balanced functions should return non-zero states
                                         # This is a simplified mock - real implementation would be more complex
+                                        # For 4 qubits, return '0000' (all zeros) for constant functions
                                         self.quasi_dists = [{0: 1.0}]  # Default to constant function result
                                 return MockResult()
                         return MockJob(circuit, shots)
@@ -1506,7 +1507,13 @@ def solve_deutsch_jozsa():
                 # Convert to counts
                 counts = {}
                 for bitstring, probability in quasi_dists.items():
-                    counts[str(bitstring)] = int(probability * 1000)
+                    # Convert integer bitstring to proper binary representation
+                    if isinstance(bitstring, int):
+                        # For MockSampler, convert integer to proper bitstring
+                        binary_str = format(bitstring, f'0{n_qubits}b')
+                        counts[binary_str] = int(probability * 1000)
+                    else:
+                        counts[str(bitstring)] = int(probability * 1000)
                 
                 # Display results
                 col1, col2 = st.columns(2)
@@ -1528,12 +1535,11 @@ def solve_deutsch_jozsa():
                     else:
                         all_zeros = all(bitstring.startswith('0' * n_qubits) for bitstring in counts.keys())
                     
-                    # Debug information
-                    st.markdown("**🔍 Debug Info:**")
-                    st.markdown(f"Function type from truth table: **{func_type}**")
-                    st.markdown(f"All measurements are zeros: **{all_zeros}**")
-                    st.markdown(f"Measured states: {list(counts.keys())}")
-                    st.markdown(f"Number of qubits: **{n_qubits}**")
+                    # Analysis information
+                    st.markdown("**📊 Analysis:**")
+                    st.markdown(f"**Function Type:** {func_type}")
+                    st.markdown(f"**Measured States:** {', '.join(counts.keys())}")
+                    st.markdown(f"**All Zeros:** {'Yes' if all_zeros else 'No'}")
                     
                     if all_zeros:
                         st.success("🎉 **RESULT: Function is CONSTANT**")
