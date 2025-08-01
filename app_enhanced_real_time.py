@@ -1420,25 +1420,38 @@ def solve_deutsch_jozsa():
         
         oracle = QuantumCircuit(n + 1)
         
-        # For each possible input
-        for i in range(2**n):
-            input_str = format(i, f'0{n}b')
-            output = f(input_str)
-            
-            if output == 1:
-                # Apply X gates to create the input pattern
-                for j, bit in enumerate(input_str):
-                    if bit == '0':
-                        oracle.x(j)
+        # For constant functions, we need to handle them differently
+        outputs = [f(format(i, f'0{n}b')) for i in range(2**n)]
+        unique_outputs = set(outputs)
+        
+        if len(unique_outputs) == 1:
+            # Constant function - all outputs are the same
+            constant_value = outputs[0]
+            if constant_value == 1:
+                # If constant function returns 1, flip the output qubit
+                oracle.x(n)
+        else:
+            # Balanced function - apply phase kickback
+            for i in range(2**n):
+                input_str = format(i, f'0{n}b')
+                output = f(input_str)
                 
-                # Apply multi-controlled X gate
-                control_qubits = list(range(n))
-                oracle.mcx(control_qubits, n)
-                
-                # Uncompute the X gates
-                for j, bit in enumerate(input_str):
-                    if bit == '0':
-                        oracle.x(j)
+                if output == 1:
+                    # Apply X gates to create the input pattern
+                    for j, bit in enumerate(input_str):
+                        if bit == '0':
+                            oracle.x(j)
+                    
+                    # Apply multi-controlled Z gate (phase kickback)
+                    control_qubits = list(range(n))
+                    oracle.h(n)
+                    oracle.mcx(control_qubits, n)
+                    oracle.h(n)
+                    
+                    # Uncompute the X gates
+                    for j, bit in enumerate(input_str):
+                        if bit == '0':
+                            oracle.x(j)
         
         return oracle
     
@@ -1505,6 +1518,12 @@ def solve_deutsch_jozsa():
                     
                     # Check if all measured states are |0⟩^n
                     all_zeros = all(bitstring.startswith('0' * n_qubits) for bitstring in counts.keys())
+                    
+                    # Debug information
+                    st.markdown("**🔍 Debug Info:**")
+                    st.markdown(f"Function type from truth table: **{func_type}**")
+                    st.markdown(f"All measurements are zeros: **{all_zeros}**")
+                    st.markdown(f"Measured states: {list(counts.keys())}")
                     
                     if all_zeros:
                         st.success("🎉 **RESULT: Function is CONSTANT**")
