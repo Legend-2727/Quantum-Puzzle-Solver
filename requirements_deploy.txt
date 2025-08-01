@@ -1,0 +1,15 @@
+# Deployment requirements - Flexible versions for Python 3.13 compatibility
+# Core quantum computing framework
+qiskit>=1.0.0,<2.0.0
+qiskit-aer>=0.12.0,<0.13.0
+
+# Web application framework
+streamlit>=1.30.0,<2.0.0
+
+# Scientific computing and visualization
+numpy>=1.24.0,<2.0.0
+matplotlib>=3.7.0,<4.0.0
+plotly>=5.15.0,<7.0.0
+
+# Additional dependencies
+pylatexenc>=2.10,<3.0.0 

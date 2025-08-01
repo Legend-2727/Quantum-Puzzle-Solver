@@ -1,11 +1,11 @@
-# Core quantum computing framework
-qiskit==0.44.0
+# Core quantum computing framework - Conservative versions for deployment
+qiskit==1.0.2
 qiskit-aer==0.12.0
 
 # Web application framework
 streamlit==1.33.0
 
-# Scientific computing and visualization
+# Scientific computing and visualization - Conservative versions
 numpy==1.24.3
 matplotlib==3.7.2
 plotly==5.17.0
