@@ -63,7 +63,7 @@ except ImportError:
     st.error("Enhanced quantum solver module not available.")
     st.stop()
 
-# Set page config
+# Set page config - Updated for Quantum Playground branding
 st.set_page_config(
     page_title="Quantum Playground",
     page_icon="👑",
