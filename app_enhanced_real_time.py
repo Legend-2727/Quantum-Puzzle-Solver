@@ -70,6 +70,404 @@ st.set_page_config(
     layout="wide"
 )
 
+# Custom CSS for beautiful animations and modern styling
+st.markdown("""
+<style>
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Global Styles */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Beautiful gradient background */
+.main .block-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+/* Animated header with slide-in effect */
+.main .block-container h1 {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: gradientShift 3s ease-in-out infinite, slideInFromTop 1s ease-out;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animated subtitle */
+.main .block-container h3 {
+    color: #ffffff;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    animation: slideInFromBottom 1s ease-out 0.3s both;
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Beautiful card containers with animations */
+.stSelectbox, .stButton, .stSlider, .stMarkdown {
+    animation: slideInFromLeft 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.stSelectbox:nth-child(1) { animation-delay: 0.1s; }
+.stSelectbox:nth-child(2) { animation-delay: 0.2s; }
+.stSelectbox:nth-child(3) { animation-delay: 0.3s; }
+.stButton { animation-delay: 0.4s; }
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Sidebar animations */
+.sidebar .sidebar-content {
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    animation: slideInFromRight 1s ease-out;
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Enhanced selectbox styling */
+.stSelectbox > div > div {
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    border: 2px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.stSelectbox > div > div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-color: #4ECDC4;
+}
+
+/* Fix dropdown text color */
+.stSelectbox > div > div > div {
+    color: #333 !important;
+    background: rgba(255,255,255,0.95) !important;
+}
+
+.stSelectbox > div > div > div > div {
+    color: #333 !important;
+    background: rgba(255,255,255,0.95) !important;
+}
+
+/* Fix dropdown options */
+.stSelectbox > div > div > div > div > div {
+    color: #333 !important;
+    background: rgba(255,255,255,0.95) !important;
+}
+
+.stSelectbox > div > div > div > div > div:hover {
+    background: rgba(78,205,196,0.2) !important;
+    color: #333 !important;
+}
+
+/* Fix slider text */
+.stSlider > div > div > div {
+    color: #333 !important;
+}
+
+.stSlider > div > div > div > div {
+    color: #333 !important;
+}
+
+/* Beautiful button styling */
+.stButton > button {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+    border: none;
+    border-radius: 25px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.stButton > button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
+}
+
+/* Progress bar styling */
+.stProgress > div > div > div {
+    background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+    border-radius: 10px;
+    animation: progressGlow 2s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+    0%, 100% { box-shadow: 0 0 5px rgba(255,107,107,0.5); }
+    50% { box-shadow: 0 0 20px rgba(78,205,196,0.8); }
+}
+
+/* Column animations */
+.stColumns > div {
+    animation: fadeInUp 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.stColumns > div:nth-child(1) { animation-delay: 0.1s; }
+.stColumns > div:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Markdown content animations */
+.stMarkdown {
+    animation: slideInFromLeft 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.stMarkdown:nth-child(1) { animation-delay: 0.1s; }
+.stMarkdown:nth-child(2) { animation-delay: 0.2s; }
+.stMarkdown:nth-child(3) { animation-delay: 0.3s; }
+
+/* Success and warning message animations */
+.stAlert {
+    animation: bounceIn 0.6s ease-out;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Code block styling */
+.stCodeBlock {
+    background: rgba(0,0,0,0.8);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-family: 'JetBrains Mono', monospace;
+    animation: slideInFromBottom 0.8s ease-out;
+}
+
+/* Matplotlib figure animations */
+.stPlotlyChart, .stImage {
+    animation: zoomIn 0.8s ease-out;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hover effects for interactive elements */
+.stSelectbox:hover, .stSlider:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main .block-container h1 {
+        font-size: 2.5rem;
+    }
+    
+    .sidebar .sidebar-content {
+        margin: 0.5rem;
+        padding: 1rem;
+    }
+}
+
+/* Simple scroll animations - ensure content loads first */
+.stMarkdown, .stColumns, .stSelectbox, .stButton, .stSlider {
+    opacity: 1;
+    transition: all 0.8s ease-out;
+}
+
+/* Animation classes for scroll-triggered effects */
+.stMarkdown.animated, .stColumns.animated, .stSelectbox.animated, .stButton.animated, .stSlider.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Simple scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Basic animation for algorithm sections */
+.algorithm-section {
+    opacity: 1;
+    transition: all 0.8s ease-out;
+}
+
+/* Additional slide animations for different directions */
+.slide-in-left {
+    animation: slideInFromLeft 0.8s ease-out forwards;
+}
+
+.slide-in-right {
+    animation: slideInFromRight 0.8s ease-out forwards;
+}
+
+.slide-in-top {
+    animation: slideInFromTop 0.8s ease-out forwards;
+}
+
+.slide-in-bottom {
+    animation: slideInFromBottom 0.8s ease-out forwards;
+}
+
+/* Zoom animations for visualizations */
+.zoom-in {
+    animation: zoomIn 0.8s ease-out forwards;
+}
+
+/* Bounce animations for success states */
+.bounce-in {
+    animation: bounceIn 0.6s ease-out forwards;
+}
+
+/* Quantum-themed decorative elements */
+.quantum-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #4ECDC4;
+    border-radius: 50%;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(78,205,196,0.7);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(78,205,196,0);
+    }
+}
+
+/* Enhanced typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+p, li {
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
+}
+</style>
+""", unsafe_allow_html=True)
+
 def create_chessboard_visualization(board, n, title="Current Board State", show_validation=True, is_valid=None):
     """Create a chessboard visualization using matplotlib"""
     if not MATPLOTLIB_AVAILABLE:
@@ -99,35 +497,25 @@ def create_chessboard_visualization(board, n, title="Current Board State", show_
                 # Add a large red circle with white number
                 circle = patches.Circle((j + 0.5, i + 0.5), 0.3, color='red', zorder=3)
                 ax.add_patch(circle)
-                
-                # Add number text
-                ax.text(j + 0.5, i + 0.5, str(queen_count), 
-                       ha='center', va='center', fontsize=20, fontweight='bold', 
-                       color='white', zorder=4)
+                # Add queen number
+                ax.text(j + 0.5, i + 0.5, str(queen_count), ha='center', va='center', 
+                       fontsize=16, fontweight='bold', color='white', zorder=4)
     
-    print(f"Debug - Board: {board}")
-    print(f"Debug - Queens placed: {queen_count}")
-    print(f"Debug - Board sum: {np.sum(board)}")
-    
-    # Set up the plot
     ax.set_xlim(0, n)
     ax.set_ylim(0, n)
     ax.set_aspect('equal')
-    ax.set_title(title, fontsize=16, fontweight='bold')
+    ax.set_title(title, fontsize=16, fontweight='bold', pad=20)
+    ax.set_xticks(range(n))
+    ax.set_yticks(range(n))
+    ax.grid(False)
     
-    # Remove ticks and labels
-    ax.set_xticks(range(n+1))
-    ax.set_yticks(range(n+1))
-    ax.set_xticklabels([])
-    ax.set_yticklabels([])
-    
-    # Add validation status
+    # Add validation status if requested
     if show_validation and is_valid is not None:
-        status_text = "✅ VALID" if is_valid else "❌ INVALID"
-        status_color = "green" if is_valid else "red"
-        ax.text(n/2, n + 0.3, status_text, ha='center', va='bottom', 
-               fontsize=14, fontweight='bold', color=status_color,
-               bbox=dict(boxstyle="round,pad=0.3", facecolor='white', edgecolor=status_color))
+        status_color = 'green' if is_valid else 'red'
+        status_text = '✓ Valid' if is_valid else '✗ Invalid'
+        ax.text(0.5, -0.5, status_text, ha='center', va='center', 
+               fontsize=14, fontweight='bold', color=status_color, 
+               transform=ax.transAxes)
     
     plt.tight_layout()
     return fig
@@ -260,105 +648,407 @@ def simulate_quantum_search(n, shots=1000):
     return result, intermediate_states
 
 def main():
-    st.title("⚛️ Quantum Puzzle Solver Suite - Real-Time Simulations")
-    st.markdown("### Multiple Quantum Algorithms Solving Different Problems")
+    # Add quantum particles animation
+    st.markdown("""
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;">
+        <div class="quantum-particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="quantum-particle" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+        <div class="quantum-particle" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+        <div class="quantum-particle" style="top: 80%; left: 70%; animation-delay: 0.5s;"></div>
+        <div class="quantum-particle" style="top: 40%; left: 90%; animation-delay: 1.5s;"></div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    # Add problem selection
-    problem_type = st.selectbox(
-        "🎯 Choose Quantum Problem to Solve:",
-        ["N-Queens Problem", "Graph Coloring Problem", "Quantum Machine Learning (QSVM)", "Deutsch-Jozsa Algorithm"],
-        index=0
-    )
+    # Add simple scroll-triggered animation JavaScript
+    st.markdown("""
+    <script>
+    // Simple scroll animation system
+    function addScrollAnimations() {
+        try {
+            const elements = document.querySelectorAll('.stMarkdown, .stColumns, .stSelectbox, .stButton, .stSlider');
+            
+            elements.forEach((el, index) => {
+                if (!el.classList.contains('animated')) {
+                    el.classList.add('animated');
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = 'all 0.8s ease-out';
+                    
+                    // Add animation with delay
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        } catch (error) {
+            console.log('Animation error:', error);
+        }
+    }
     
+    // Run animations on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(addScrollAnimations, 500);
+    });
+    
+    // Run animations on scroll
+    window.addEventListener('scroll', () => {
+        setTimeout(addScrollAnimations, 100);
+    });
+    
+    // Initial run
+    setTimeout(addScrollAnimations, 1000);
+    </script>
+    """, unsafe_allow_html=True)
+    
+    # Animated header with enhanced styling
+    st.markdown("""
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h1 style="margin-bottom: 1rem;">⚛️ Quantum Playground</h1>
+        <h3 style="color: rgba(255,255,255,0.9); font-weight: 300; margin-bottom: 2rem;">
+            Explore the Future of Computing with Interactive Quantum Algorithms
+        </h3>
+        <div style="width: 100px; height: 3px; background: linear-gradient(45deg, #FF6B6B, #4ECDC4); margin: 0 auto; border-radius: 2px;"></div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Enhanced problem selection with beautiful cards
+    st.markdown("""
+    <div style="margin-bottom: 2rem;">
+        <h2 style="text-align: center; color: white; margin-bottom: 1.5rem;">🎯 Choose Your Quantum Adventure</h2>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Create interactive algorithm selection buttons
+    st.markdown("""
+    <style>
+    .algorithm-button {
+        background: rgba(255,255,255,0.1);
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid rgba(255,255,255,0.2);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin-bottom: 1rem;
+    }
+    .algorithm-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        border-color: rgba(255,255,255,0.4);
+    }
+    .algorithm-button.selected {
+        background: linear-gradient(45deg, rgba(255,107,107,0.3), rgba(78,205,196,0.3));
+        border: 2px solid rgba(255,255,255,0.6);
+        box-shadow: 0 0 20px rgba(78,205,196,0.5);
+        transform: translateY(-3px);
+    }
+    .algorithm-button.selected h3 {
+        animation: pulse 2s ease-in-out infinite;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Create columns for algorithm buttons
+    col1, col2, col3, col4 = st.columns(4)
+    
+    # Use session state to track selected algorithm
+    if 'selected_algorithm' not in st.session_state:
+        st.session_state.selected_algorithm = "N-Queens Problem"
+    
+    with col1:
+        is_selected = st.session_state.selected_algorithm == "N-Queens Problem"
+        selected_class = "selected" if is_selected else ""
+        if st.button("👑 N-Queens", key="nqueens_btn", help="Quantum search for chess solutions"):
+            st.session_state.selected_algorithm = "N-Queens Problem"
+            st.rerun()
+        st.markdown(f"""
+        <div class="algorithm-button {selected_class}" style="animation: slideInFromLeft 0.8s ease-out 0.1s both;">
+            <h3 style="color: #FF6B6B; margin-bottom: 0.5rem; font-size: 2rem;">👑</h3>
+            <h4 style="color: white; margin-bottom: 0.5rem;">N-Queens</h4>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Quantum search for chess solutions</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        is_selected = st.session_state.selected_algorithm == "Graph Coloring Problem"
+        selected_class = "selected" if is_selected else ""
+        if st.button("🎨 Graph Coloring", key="graph_btn", help="Optimize with quantum algorithms"):
+            st.session_state.selected_algorithm = "Graph Coloring Problem"
+            st.rerun()
+        st.markdown(f"""
+        <div class="algorithm-button {selected_class}" style="animation: slideInFromLeft 0.8s ease-out 0.2s both;">
+            <h3 style="color: #4ECDC4; margin-bottom: 0.5rem; font-size: 2rem;">🎨</h3>
+            <h4 style="color: white; margin-bottom: 0.5rem;">Graph Coloring</h4>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Optimize with quantum algorithms</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        is_selected = st.session_state.selected_algorithm == "Quantum Machine Learning (QSVM)"
+        selected_class = "selected" if is_selected else ""
+        if st.button("🤖 Quantum ML", key="qml_btn", help="Machine learning with quantum features"):
+            st.session_state.selected_algorithm = "Quantum Machine Learning (QSVM)"
+            st.rerun()
+        st.markdown(f"""
+        <div class="algorithm-button {selected_class}" style="animation: slideInFromLeft 0.8s ease-out 0.3s both;">
+            <h3 style="color: #45B7D1; margin-bottom: 0.5rem; font-size: 2rem;">🤖</h3>
+            <h4 style="color: white; margin-bottom: 0.5rem;">Quantum ML</h4>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Machine learning with quantum features</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col4:
+        is_selected = st.session_state.selected_algorithm == "Deutsch-Jozsa Algorithm"
+        selected_class = "selected" if is_selected else ""
+        if st.button("🔬 Deutsch-Jozsa", key="dj_btn", help="Exponential quantum speedup"):
+            st.session_state.selected_algorithm = "Deutsch-Jozsa Algorithm"
+            st.rerun()
+        st.markdown(f"""
+        <div class="algorithm-button {selected_class}" style="animation: slideInFromLeft 0.8s ease-out 0.4s both;">
+            <h3 style="color: #96CEB4; margin-bottom: 0.5rem; font-size: 2rem;">🔬</h3>
+            <h4 style="color: white; margin-bottom: 0.5rem;">Deutsch-Jozsa</h4>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">Exponential quantum speedup</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Use the selected algorithm from session state
+    problem_type = st.session_state.selected_algorithm
+    
+    # Add a beautiful separator
+    st.markdown("""
+    <div style="height: 2px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); margin: 2rem 0;"></div>
+    """, unsafe_allow_html=True)
+    
+    # Add animation wrapper for algorithm sections
+    st.markdown("""
+    <style>
+    .algorithm-section {
+        animation: slideInFromBottom 1s ease-out 0.3s both;
+        opacity: 0;
+    }
+    .algorithm-section.animate {
+        opacity: 1;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Wrap each algorithm section in animated container
     if problem_type == "N-Queens Problem":
+        st.markdown('<div class="algorithm-section">', unsafe_allow_html=True)
         solve_n_queens()
+        st.markdown('</div>', unsafe_allow_html=True)
     elif problem_type == "Graph Coloring Problem":
+        st.markdown('<div class="algorithm-section">', unsafe_allow_html=True)
         solve_graph_coloring()
+        st.markdown('</div>', unsafe_allow_html=True)
     elif problem_type == "Deutsch-Jozsa Algorithm":
+        st.markdown('<div class="algorithm-section">', unsafe_allow_html=True)
         solve_deutsch_jozsa()
+        st.markdown('</div>', unsafe_allow_html=True)
     else:
+        st.markdown('<div class="algorithm-section">', unsafe_allow_html=True)
         solve_quantum_ml()
+        st.markdown('</div>', unsafe_allow_html=True)
 
 def solve_n_queens():
-    st.markdown("## 👑 N-Queens Problem")
+    # Enhanced header with animations
     st.markdown("""
-    This simulation shows how the quantum algorithm explores different board configurations 
-    and finds a valid N-Queens solution through quantum superposition and measurement.
-    """)
+    <div style="text-align: center; margin-bottom: 2rem; animation: slideInFromTop 1s ease-out 0.1s both;">
+        <h2 style="color: #FF6B6B; margin-bottom: 1rem; font-size: 2.5rem;">👑 N-Queens Quantum Solver</h2>
+        <div style="width: 80px; height: 3px; background: linear-gradient(45deg, #FF6B6B, #4ECDC4); margin: 0 auto; border-radius: 2px; animation: slideInFromLeft 1s ease-out 0.5s both;"></div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    # Sidebar controls
-    st.sidebar.header("⚙️ N-Queens Settings")
-    n = st.sidebar.selectbox("Board Size (N)", [4, 5, 6], index=0)
-    shots = st.sidebar.slider("Quantum Shots", min_value=500, max_value=2000, value=1000, step=100)
-    simulation_speed = st.sidebar.slider("Simulation Speed (seconds)", min_value=0.5, max_value=3.0, value=1.5, step=0.5)
+    # Beautiful description with enhanced styling and animations
+    st.markdown("""
+    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 2rem; animation: slideInFromLeft 1s ease-out 0.2s both;">
+        <h4 style="color: white; margin-bottom: 1rem; animation: slideInFromTop 0.8s ease-out 0.3s both;">🔬 How Quantum Computing Solves N-Queens</h4>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 1rem; animation: slideInFromLeft 0.8s ease-out 0.4s both;">
+            This simulation demonstrates how quantum algorithms explore all possible board configurations simultaneously 
+            using quantum superposition, then use Grover's search algorithm to find valid solutions exponentially faster 
+            than classical approaches.
+        </p>
+        <div style="display: flex; justify-content: space-around; margin-top: 1.5rem;">
+            <div style="text-align: center; animation: slideInFromBottom 0.8s ease-out 0.5s both;">
+                <div style="font-size: 2rem; color: #FF6B6B;">⚛️</div>
+                <div style="color: white; font-weight: 600;">Quantum Superposition</div>
+            </div>
+            <div style="text-align: center; animation: slideInFromBottom 0.8s ease-out 0.6s both;">
+                <div style="font-size: 2rem; color: #4ECDC4;">🔍</div>
+                <div style="color: white; font-weight: 600;">Grover's Search</div>
+            </div>
+            <div style="text-align: center; animation: slideInFromBottom 0.8s ease-out 0.7s both;">
+                <div style="font-size: 2rem; color: #45B7D1;">🎯</div>
+                <div style="color: white; font-weight: 600;">Solution Discovery</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("**🎯 What you'll see:**")
-    st.sidebar.markdown("- Queens being placed step by step")
-    st.sidebar.markdown("- Real-time validation of each state")
-    st.sidebar.markdown("- Invalid configurations being rejected")
-    st.sidebar.markdown("- Final valid solution discovery")
+    # Enhanced sidebar with beautiful styling and animations
+    st.sidebar.markdown("""
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 1rem; animation: slideInFromRight 0.8s ease-out;">
+        <h4 style="color: #FF6B6B; margin-bottom: 1rem;">⚙️ Simulation Controls</h4>
+    </div>
+    """, unsafe_allow_html=True)
     
-    st.sidebar.markdown("**⚠️ Note:**")
-    st.sidebar.markdown("- N=2 and N=3 have no solutions")
-    st.sidebar.markdown("- N=4+ have valid solutions")
+    # Add animation classes to form elements
+    st.markdown("""
+    <style>
+    .stSelectbox > div > div {
+        animation: slideInFromRight 0.8s ease-out 0.2s both;
+    }
+    .stSlider > div > div {
+        animation: slideInFromRight 0.8s ease-out 0.3s both;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
-    # Main simulation area
-    if st.button("🚀 Start Quantum Simulation", type="primary"):
-        st.markdown("---")
-        st.markdown("## ⚛️ Quantum Algorithm Execution")
+    n = st.sidebar.selectbox("🎲 Board Size (N)", [4, 5, 6], index=0)
+    shots = st.sidebar.slider("🎯 Quantum Shots", min_value=500, max_value=2000, value=1000, step=100)
+    simulation_speed = st.sidebar.slider("⚡ Simulation Speed", min_value=0.5, max_value=3.0, value=1.5, step=0.5)
+    
+    st.sidebar.markdown("""
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); margin: 1rem 0; animation: slideInFromRight 1s ease-out 0.4s both;">
+        <h4 style="color: #4ECDC4; margin-bottom: 1rem;">🎯 What You'll Experience</h4>
+        <ul style="color: rgba(255,255,255,0.9); padding-left: 1rem;">
+            <li>Queens appearing step by step</li>
+            <li>Real-time validation feedback</li>
+            <li>Invalid configurations rejected</li>
+            <li>Final solution discovery</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.sidebar.markdown("""
+    <div style="background: rgba(255,107,107,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(255,107,107,0.3); animation: slideInFromRight 1s ease-out 0.5s both;">
+        <h5 style="color: #FF6B6B; margin-bottom: 0.5rem;">⚠️ Important Notes</h5>
+        <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+            • N=2 and N=3 have no solutions<br>
+            • N=4+ have valid solutions<br>
+            • Quantum advantage increases with N
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Enhanced simulation button with beautiful styling and animations
+    st.markdown("""
+    <div style="text-align: center; margin: 2rem 0; animation: slideInFromBottom 1s ease-out 0.5s both;">
+        <div style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4); padding: 3px; border-radius: 30px; display: inline-block; animation: pulse 2s ease-in-out infinite;">
+            <button style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4); border: none; border-radius: 27px; padding: 1rem 3rem; font-size: 1.2rem; font-weight: 600; color: white; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.3);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.3)'">
+                🚀 Launch Quantum Simulation
+            </button>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Main simulation area with enhanced styling
+    if st.button("🚀 Launch Quantum Simulation", type="primary"):
+        # Beautiful separator
+        st.markdown("""
+        <div style="height: 3px; background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1); margin: 2rem 0; border-radius: 2px;"></div>
+        """, unsafe_allow_html=True)
         
-        # Progress tracking
+        # Enhanced execution header
+        st.markdown("""
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h2 style="color: #4ECDC4; margin-bottom: 1rem;">⚛️ Quantum Algorithm Execution</h2>
+            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">Witness the power of quantum computing in real-time</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Enhanced progress tracking with beautiful styling and animations
+        st.markdown("""
+        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 2rem; animation: slideInFromTop 1s ease-out;">
+            <h4 style="color: white; margin-bottom: 1rem; text-align: center;">🔄 Quantum Processing Status</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
         progress_bar = st.progress(0)
         status_text = st.empty()
         
-        # Create containers for visualization
+        # Create enhanced containers for visualization with animations
         col1, col2 = st.columns([2, 1])
         
         with col1:
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 1rem; animation: slideInFromLeft 1s ease-out 0.2s both;">
+                <h4 style="color: #FF6B6B; margin-bottom: 1rem; text-align: center;">👑 Chessboard Visualization</h4>
+            </div>
+            """, unsafe_allow_html=True)
             board_container = st.empty()
         
         with col2:
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 1rem; animation: slideInFromRight 1s ease-out 0.3s both;">
+                <h4 style="color: #4ECDC4; margin-bottom: 1rem; text-align: center;">📊 Live Statistics</h4>
+            </div>
+            """, unsafe_allow_html=True)
             info_container = st.empty()
             stats_container = st.empty()
         
-        # Step 1: Initialize
-        status_text.text("🔄 Initializing quantum superposition...")
+        # Step 1: Initialize with enhanced styling
+        status_text.markdown("""
+        <div style="background: rgba(255,107,107,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(255,107,107,0.3); text-align: center;">
+            <h5 style="color: #FF6B6B; margin: 0;">🔄 Initializing Quantum Superposition</h5>
+        </div>
+        """, unsafe_allow_html=True)
         progress_bar.progress(0.1)
         
-        # Show empty board
+        # Show empty board with enhanced styling
         empty_board = np.zeros((n, n), dtype=int)
         fig_empty = create_chessboard_visualization(empty_board, n, "Initial Empty Board", False)
         board_container.pyplot(fig_empty)
         
         with info_container:
-            st.markdown("**📊 Board Status:**")
-            st.markdown("- Queens placed: 0")
-            st.markdown("- Configuration: Empty")
-            st.markdown("- Status: Initializing...")
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2);">
+                <h5 style="color: #4ECDC4; margin-bottom: 0.5rem;">📊 Board Status</h5>
+                <p style="color: rgba(255,255,255,0.9); margin: 0.2rem 0;">👑 Queens placed: <strong>0</strong></p>
+                <p style="color: rgba(255,255,255,0.9); margin: 0.2rem 0;">⚙️ Configuration: <strong>Empty</strong></p>
+                <p style="color: rgba(255,255,255,0.9); margin: 0.2rem 0;">🔄 Status: <strong>Initializing...</strong></p>
+            </div>
+            """, unsafe_allow_html=True)
         
         time.sleep(simulation_speed)
         
-        # Step 2: Run quantum simulation
-        status_text.text("⚛️ Running quantum algorithm...")
+        # Step 2: Run quantum simulation with enhanced styling
+        status_text.markdown("""
+        <div style="background: rgba(78,205,196,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(78,205,196,0.3); text-align: center;">
+            <h5 style="color: #4ECDC4; margin: 0;">⚛️ Running Quantum Algorithm</h5>
+        </div>
+        """, unsafe_allow_html=True)
         progress_bar.progress(0.3)
         
         with info_container:
-            st.markdown("**📊 Board Status:**")
-            st.markdown("- Quantum superposition created")
-            st.markdown("- Grover's algorithm running...")
-            st.markdown("- Exploring solution space...")
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2);">
+                <h5 style="color: #4ECDC4; margin-bottom: 0.5rem;">📊 Quantum Status</h5>
+                <p style="color: rgba(255,255,255,0.9); margin: 0.2rem 0;">⚛️ Superposition: <strong>Created</strong></p>
+                <p style="color: rgba(255,255,255,0.9); margin: 0.2rem 0;">🔍 Grover's Algorithm: <strong>Running</strong></p>
+                <p style="color: rgba(255,255,255,0.9); margin: 0.2rem 0;">🌌 Solution Space: <strong>Exploring</strong></p>
+            </div>
+            """, unsafe_allow_html=True)
         
         time.sleep(simulation_speed)
         
-        # Step 3: Get results and simulate states
-        status_text.text("🔍 Analyzing quantum results...")
+        # Step 3: Get results and simulate states with enhanced styling
+        status_text.markdown("""
+        <div style="background: rgba(69,183,209,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(69,183,209,0.3); text-align: center;">
+            <h5 style="color: #45B7D1; margin: 0;">🔍 Analyzing Quantum Results</h5>
+        </div>
+        """, unsafe_allow_html=True)
         progress_bar.progress(0.5)
         
         result, intermediate_states = simulate_quantum_search(n, shots)
         
-        # Step 4: Show intermediate states
-        status_text.text("📋 Exploring board configurations...")
+        # Step 4: Show intermediate states with enhanced styling
+        status_text.markdown("""
+        <div style="background: rgba(150,206,180,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(150,206,180,0.3); text-align: center;">
+            <h5 style="color: #96CEB4; margin: 0;">📋 Exploring Board Configurations</h5>
+        </div>
+        """, unsafe_allow_html=True)
         progress_bar.progress(0.7)
         
         total_states = len(intermediate_states)
@@ -402,34 +1092,88 @@ def solve_n_queens():
             
             time.sleep(simulation_speed)
         
-        # Final step
-        status_text.text("🎉 Simulation completed!")
+        # Final step with beautiful success animation
+        status_text.markdown("""
+        <div style="background: linear-gradient(45deg, rgba(78,205,196,0.3), rgba(150,206,180,0.3)); padding: 1.5rem; border-radius: 15px; border: 2px solid rgba(78,205,196,0.5); text-align: center; animation: pulse 2s ease-in-out infinite;">
+            <h4 style="color: #4ECDC4; margin: 0; font-size: 1.5rem;">🎉 Quantum Simulation Completed!</h4>
+            <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0 0;">The quantum algorithm has successfully explored all configurations!</p>
+        </div>
+        """, unsafe_allow_html=True)
         progress_bar.progress(1.0)
         
-        # Show final results
-        st.markdown("---")
-        st.markdown("## 🎯 Final Results")
+        # Enhanced final results with beautiful styling and animations
+        st.markdown("""
+        <div style="height: 3px; background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1); margin: 2rem 0; border-radius: 2px; animation: slideInFromLeft 1s ease-out;"></div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div style="text-align: center; margin-bottom: 2rem; animation: slideInFromBottom 1s ease-out 0.2s both;">
+            <h2 style="color: #96CEB4; margin-bottom: 1rem;">🎯 Final Results</h2>
+            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">Quantum algorithm performance and solution details</p>
+        </div>
+        """, unsafe_allow_html=True)
         
         col1, col2 = st.columns(2)
         
         with col1:
-            st.markdown("**📊 Quantum Results:**")
-            st.metric("Most Probable Result", result['most_probable'])
-            st.metric("Total Shots", shots)
-            st.metric("Solution Valid", "✅ Yes")
+            st.markdown("""
+            <div style="background: rgba(255,107,107,0.2); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255,107,107,0.3); animation: slideInFromLeft 1s ease-out 0.3s both;">
+                <h4 style="color: #FF6B6B; margin-bottom: 1rem; text-align: center;">📊 Quantum Results</h4>
+                <div style="display: grid; gap: 0.8rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: rgba(255,255,255,0.8);">🎯 Most Probable:</span>
+                        <span style="color: white; font-weight: 600; background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 8px;">{}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: rgba(255,255,255,0.8);">🎲 Total Shots:</span>
+                        <span style="color: white; font-weight: 600;">{}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: rgba(255,255,255,0.8);">✅ Solution Valid:</span>
+                        <span style="color: #4ECDC4; font-weight: 600;">✅ Yes</span>
+                    </div>
+                </div>
+            </div>
+            """.format(result['most_probable'], shots), unsafe_allow_html=True)
             
-            # Show queen coordinates
+            # Show queen coordinates with enhanced styling
             solver = NQueensQuantumSolver(n)
             coordinates = solver.get_solution_coordinates(result['most_probable'])
-            st.markdown(f"**📍 Queen Positions:** {coordinates}")
+            st.markdown("""
+            <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); margin-top: 1rem;">
+                <h5 style="color: #4ECDC4; margin-bottom: 0.5rem;">📍 Queen Positions</h5>
+                <p style="color: white; font-family: 'JetBrains Mono', monospace; background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 5px; margin: 0;">{}</p>
+            </div>
+            """.format(coordinates), unsafe_allow_html=True)
         
         with col2:
-            st.markdown("**📈 Algorithm Performance:**")
-            st.metric("States Explored", total_states)
-            st.metric("Valid Solutions Found", 1)
-            st.metric("Success Rate", f"{(1/total_states)*100:.1f}%")
+            st.markdown("""
+            <div style="background: rgba(78,205,196,0.2); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(78,205,196,0.3); animation: slideInFromRight 1s ease-out 0.4s both;">
+                <h4 style="color: #4ECDC4; margin-bottom: 1rem; text-align: center;">📈 Algorithm Performance</h4>
+                <div style="display: grid; gap: 0.8rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: rgba(255,255,255,0.8);">🔍 States Explored:</span>
+                        <span style="color: white; font-weight: 600;">{}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: rgba(255,255,255,0.8);">✅ Valid Solutions:</span>
+                        <span style="color: #4ECDC4; font-weight: 600;">1</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: rgba(255,255,255,0.8);">📊 Success Rate:</span>
+                        <span style="color: #FF6B6B; font-weight: 600;">{:.1f}%</span>
+                    </div>
+                </div>
+            </div>
+            """.format(total_states, (1/total_states)*100), unsafe_allow_html=True)
         
-        # Show final board
+        # Show final board with enhanced styling and animations
+        st.markdown("""
+        <div style="text-align: center; margin: 2rem 0; animation: slideInFromBottom 1s ease-out 0.5s both;">
+            <h3 style="color: #96CEB4; margin-bottom: 1rem;">👑 Final Valid Solution</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        
         final_board = intermediate_states[-1]['board']
         fig_final = create_chessboard_visualization(
             final_board, n, 
@@ -438,45 +1182,104 @@ def solve_n_queens():
         )
         st.pyplot(fig_final)
         
-        st.success("🎉 Quantum algorithm successfully found a valid N-Queens solution!")
+        # Enhanced success message with animations
+        st.markdown("""
+        <div style="background: linear-gradient(45deg, rgba(78,205,196,0.3), rgba(150,206,180,0.3)); padding: 2rem; border-radius: 20px; border: 2px solid rgba(78,205,196,0.5); text-align: center; margin: 2rem 0; animation: bounceIn 1s ease-out 0.6s both;">
+            <h3 style="color: #4ECDC4; margin-bottom: 1rem;">🎉 Quantum Success!</h3>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin: 0;">
+                The quantum algorithm has successfully found a valid N-Queens solution using Grover's search algorithm!
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
     
-    # Footer
-    st.markdown("---")
+    # Enhanced footer with beautiful styling and animations
     st.markdown("""
-    **⚡ Technical Details:**
-    - **Algorithm:** Grover's Quantum Search Algorithm
-    - **Framework:** Qiskit with Quantum Sampler
-    - **Visualization:** Real-time board state progression
-    - **Validation:** Step-by-step conflict detection
+    <div style="height: 3px; background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1); margin: 2rem 0; border-radius: 2px; animation: slideInFromLeft 1s ease-out;"></div>
+    """, unsafe_allow_html=True)
     
-    **🎓 Educational Value:**
-    This simulation demonstrates how quantum algorithms can efficiently search through 
-    complex solution spaces and find valid configurations that satisfy all constraints.
-    """)
+    st.markdown("""
+    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); margin: 2rem 0; animation: slideInFromBottom 1s ease-out 0.2s both;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="animation: slideInFromLeft 1s ease-out 0.3s both;">
+                <h4 style="color: #FF6B6B; margin-bottom: 1rem;">⚡ Technical Details</h4>
+                <ul style="color: rgba(255,255,255,0.9); padding-left: 1.5rem;">
+                    <li><strong>Algorithm:</strong> Grover's Quantum Search Algorithm</li>
+                    <li><strong>Framework:</strong> Qiskit with Quantum Sampler</li>
+                    <li><strong>Visualization:</strong> Real-time board state progression</li>
+                    <li><strong>Validation:</strong> Step-by-step conflict detection</li>
+                </ul>
+            </div>
+            <div style="animation: slideInFromRight 1s ease-out 0.4s both;">
+                <h4 style="color: #4ECDC4; margin-bottom: 1rem;">🎓 Educational Value</h4>
+                <p style="color: rgba(255,255,255,0.9); line-height: 1.6;">
+                    This simulation demonstrates how quantum algorithms can efficiently search through 
+                    complex solution spaces and find valid configurations that satisfy all constraints.
+                </p>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 def solve_graph_coloring():
-    st.markdown("## 🌈 Graph Coloring Problem")
+    # Enhanced header with animations
     st.markdown("""
-    This simulation shows how Grover's algorithm can solve the Graph Coloring problem - 
-    assigning colors to vertices such that no two adjacent vertices have the same color.
-    """)
+    <div style="text-align: center; margin-bottom: 2rem; animation: slideInFromTop 1s ease-out 0.1s both;">
+        <h2 style="color: #4ECDC4; margin-bottom: 1rem; font-size: 2.5rem;">🌈 Graph Coloring Problem</h2>
+        <div style="width: 80px; height: 3px; background: linear-gradient(45deg, #4ECDC4, #45B7D1); margin: 0 auto; border-radius: 2px; animation: slideInFromLeft 1s ease-out 0.5s both;"></div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    # Sidebar controls for graph coloring
-    st.sidebar.header("⚙️ Graph Coloring Settings")
-    graph_type = st.sidebar.selectbox("Graph Type", [
+    # Beautiful description with enhanced styling and animations
+    st.markdown("""
+    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 2rem; animation: slideInFromLeft 1s ease-out 0.2s both;">
+        <h4 style="color: white; margin-bottom: 1rem; animation: slideInFromTop 0.8s ease-out 0.3s both;">🎨 How Quantum Computing Solves Graph Coloring</h4>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 1rem; animation: slideInFromLeft 0.8s ease-out 0.4s both;">
+            This simulation demonstrates how quantum algorithms can efficiently solve the Graph Coloring problem - 
+            assigning colors to vertices such that no two adjacent vertices have the same color, using quantum optimization techniques.
+        </p>
+        <div style="display: flex; justify-content: space-around; margin-top: 1.5rem;">
+            <div style="text-align: center; animation: slideInFromBottom 0.8s ease-out 0.5s both;">
+                <div style="font-size: 2rem; color: #4ECDC4;">🎨</div>
+                <div style="color: white; font-weight: 600;">Color Assignment</div>
+            </div>
+            <div style="text-align: center; animation: slideInFromBottom 0.8s ease-out 0.6s both;">
+                <div style="font-size: 2rem; color: #45B7D1;">🔍</div>
+                <div style="color: white; font-weight: 600;">Constraint Checking</div>
+            </div>
+            <div style="text-align: center; animation: slideInFromBottom 0.8s ease-out 0.7s both;">
+                <div style="font-size: 2rem; color: #96CEB4;">✅</div>
+                <div style="color: white; font-weight: 600;">Valid Solution</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Enhanced sidebar controls for graph coloring with animations
+    st.sidebar.markdown("""
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); margin-bottom: 1rem; animation: slideInFromRight 0.8s ease-out;">
+        <h4 style="color: #4ECDC4; margin-bottom: 1rem;">⚙️ Graph Coloring Controls</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    graph_type = st.sidebar.selectbox("🎨 Graph Type", [
         "Triangle (K3)", "Square Cycle", "Pentagon Cycle", "Hexagon Cycle",
         "Complete K4", "Complete K5", "Bipartite K2,3", "Wheel W4", "Star S5", "Complex Mixed"
     ], index=1)
-    num_colors = st.sidebar.selectbox("Number of Colors", [2, 3, 4, 5], index=1)
-    shots = st.sidebar.slider("Quantum Shots", min_value=500, max_value=2000, value=1000, step=100)
-    simulation_speed = st.sidebar.slider("Simulation Speed (seconds)", min_value=0.5, max_value=3.0, value=1.5, step=0.5)
+    num_colors = st.sidebar.selectbox("🎯 Number of Colors", [2, 3, 4, 5], index=1)
+    shots = st.sidebar.slider("🎲 Quantum Shots", min_value=500, max_value=2000, value=1000, step=100)
+    simulation_speed = st.sidebar.slider("⚡ Simulation Speed", min_value=0.5, max_value=3.0, value=1.5, step=0.5)
     
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("**🎯 What you'll see:**")
-    st.sidebar.markdown("- Graph structure visualization")
-    st.sidebar.markdown("- Step-by-step vertex coloring")
-    st.sidebar.markdown("- Constraint validation")
-    st.sidebar.markdown("- Valid coloring solution")
+    st.sidebar.markdown("""
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); margin: 1rem 0; animation: slideInFromRight 1s ease-out 0.4s both;">
+        <h4 style="color: #4ECDC4; margin-bottom: 1rem;">🎯 What You'll Experience</h4>
+        <ul style="color: rgba(255,255,255,0.9); padding-left: 1rem;">
+            <li>Graph structure visualization</li>
+            <li>Step-by-step vertex coloring</li>
+            <li>Constraint validation</li>
+            <li>Valid coloring solution</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Define graphs with complexity indicators
     graphs = {
@@ -494,20 +1297,63 @@ def solve_graph_coloring():
     
     graph = graphs[graph_type]
     
-    # Add chromatic number warning
+    # Add chromatic number warning with animations
     chromatic_number = graph.get('chromatic', num_colors)
     if num_colors < chromatic_number:
-        st.sidebar.error(f"⚠️ **Impossible Coloring!**\n\n{graph_type} requires at least **{chromatic_number} colors**.\n\nYou selected {num_colors} color(s).")
-        st.sidebar.markdown("The simulation will show why this fails.")
+        st.sidebar.markdown(f"""
+        <div style="background: rgba(255,107,107,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(255,107,107,0.3); animation: slideInFromRight 1s ease-out 0.5s both;">
+            <h5 style="color: #FF6B6B; margin-bottom: 0.5rem;">⚠️ Impossible Coloring!</h5>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+                {graph_type} requires at least <strong>{chromatic_number} colors</strong>.<br>
+                You selected {num_colors} color(s).<br>
+                The simulation will show why this fails.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
     elif num_colors == chromatic_number:
-        st.sidebar.success(f"✅ **Optimal Coloring!**\n\n{graph_type} needs exactly **{chromatic_number} colors**.")
+        st.sidebar.markdown(f"""
+        <div style="background: rgba(78,205,196,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(78,205,196,0.3); animation: slideInFromRight 1s ease-out 0.5s both;">
+            <h5 style="color: #4ECDC4; margin-bottom: 0.5rem;">✅ Optimal Coloring!</h5>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+                {graph_type} needs exactly <strong>{chromatic_number} colors</strong>.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
     else:
-        st.sidebar.info(f"💡 **Over-coloring**\n\n{graph_type} only needs **{chromatic_number} colors**, but you selected {num_colors}.")
+        st.sidebar.markdown(f"""
+        <div style="background: rgba(69,183,209,0.2); padding: 1rem; border-radius: 10px; border: 1px solid rgba(69,183,209,0.3); animation: slideInFromRight 1s ease-out 0.5s both;">
+            <h5 style="color: #45B7D1; margin-bottom: 0.5rem;">💡 Over-coloring</h5>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0;">
+                {graph_type} only needs <strong>{chromatic_number} colors</strong>, but you selected {num_colors}.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Enhanced simulation button with animations
+    st.markdown("""
+    <div style="text-align: center; margin: 2rem 0; animation: slideInFromBottom 1s ease-out 0.5s both;">
+        <div style="background: linear-gradient(45deg, #4ECDC4, #45B7D1); padding: 3px; border-radius: 30px; display: inline-block; animation: pulse 2s ease-in-out infinite;">
+            <button style="background: linear-gradient(45deg, #4ECDC4, #45B7D1); border: none; border-radius: 27px; padding: 1rem 3rem; font-size: 1.2rem; font-weight: 600; color: white; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.3);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.3)'">
+                🚀 Launch Graph Coloring Simulation
+            </button>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Main simulation area
-    if st.button("🚀 Start Graph Coloring Simulation", type="primary"):
-        st.markdown("---")
-        st.markdown("## ⚛️ Quantum Graph Coloring Execution")
+    if st.button("🚀 Launch Graph Coloring Simulation", type="primary"):
+        # Beautiful separator
+        st.markdown("""
+        <div style="height: 3px; background: linear-gradient(90deg, #4ECDC4, #45B7D1, #96CEB4); margin: 2rem 0; border-radius: 2px;"></div>
+        """, unsafe_allow_html=True)
+        
+        # Enhanced execution header
+        st.markdown("""
+        <div style="text-align: center; margin-bottom: 2rem; animation: slideInFromBottom 1s ease-out 0.2s both;">
+            <h2 style="color: #4ECDC4; margin-bottom: 1rem;">⚛️ Quantum Graph Coloring Execution</h2>
+            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">Witness the power of quantum computing in graph optimization</p>
+        </div>
+        """, unsafe_allow_html=True)
         
         # Progress tracking
         progress_bar = st.progress(0)
