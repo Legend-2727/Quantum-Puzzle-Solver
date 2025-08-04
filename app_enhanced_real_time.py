@@ -72,197 +72,551 @@ st.set_page_config(
 
 # Function to load external CSS and JS files
 def load_external_files():
-    try:
-        # Load external CSS file
-        with open('static/styles.css', 'r') as f:
-            css_content = f.read()
-        st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
+    # Always use embedded CSS for maximum compatibility in deployment
+    css_content = """
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    /* Global Styles */
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Ensure proper background rendering */
+    html, body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Streamlit specific background fixes */
+    #root {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+
+    /* Beautiful gradient background */
+    .main .block-container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: none;
+    }
+
+    /* Fallback for older browsers */
+    @supports not (background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)) {
+        .main .block-container {
+            background: #667eea;
+        }
+    }
+
+    /* Animated header with slide-in effect */
+    .main .block-container h1 {
+        background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: gradientShift 3s ease-in-out infinite, slideInFromTop 1s ease-out;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes slideInFromTop {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Animated subtitle */
+    .main .block-container h3 {
+        color: #ffffff;
+        text-align: center;
+        font-weight: 400;
+        margin-bottom: 3rem;
+        animation: slideInFromBottom 1s ease-out 0.3s both;
+    }
+
+    @keyframes slideInFromBottom {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Algorithm button styling */
+    .algorithm-button {
+        background: rgba(255,255,255,0.1);
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid rgba(255,255,255,0.2);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .algorithm-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        border-color: rgba(255,255,255,0.4);
+    }
+
+    .algorithm-button.selected {
+        background: linear-gradient(45deg, rgba(255,107,107,0.3), rgba(78,205,196,0.3));
+        border: 2px solid rgba(255,255,255,0.6);
+        box-shadow: 0 0 20px rgba(78,205,196,0.5);
+        transform: translateY(-3px);
+    }
+
+    .algorithm-button.selected h3 {
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Sidebar animations */
+    .sidebar .sidebar-content {
+        background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 1rem;
+        border: 1px solid rgba(255,255,255,0.2);
+        animation: slideInFromRight 1s ease-out;
+    }
+
+    /* Fix sidebar positioning */
+    .sidebar .sidebar-content {
+        position: relative;
+        left: 0;
+        right: auto;
+        width: auto;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    /* Ensure sidebar is fully visible */
+    .sidebar {
+        width: auto !important;
+        min-width: 300px;
+        max-width: none;
+        position: relative;
+        left: 0;
+        right: auto;
+    }
+
+    .sidebar .sidebar-content {
+        width: 100% !important;
+        max-width: none !important;
+        overflow: visible;
+        position: relative;
+        left: 0;
+        right: auto;
+    }
+
+    /* Fix main content area positioning */
+    .main .block-container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: none;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    @keyframes slideInFromRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Enhanced selectbox styling */
+    .stSelectbox > div > div {
+        background: rgba(255,255,255,0.9);
+        border-radius: 15px;
+        border: 2px solid rgba(255,255,255,0.3);
+        transition: all 0.3s ease;
+    }
+
+    .stSelectbox > div > div:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        border-color: #4ECDC4;
+    }
+
+    /* Fix dropdown text color */
+    .stSelectbox > div > div > div {
+        color: #333 !important;
+        background: rgba(255,255,255,0.95) !important;
+    }
+
+    .stSelectbox > div > div > div > div {
+        color: #333 !important;
+        background: rgba(255,255,255,0.95) !important;
+    }
+
+    /* Fix dropdown options */
+    .stSelectbox > div > div > div > div > div {
+        color: #333 !important;
+        background: rgba(255,255,255,0.95) !important;
+    }
+
+    .stSelectbox > div > div > div > div > div:hover {
+        background: rgba(78,205,196,0.2) !important;
+        color: #333 !important;
+    }
+
+    /* Fix slider text */
+    .stSlider > div > div > div {
+        color: #333 !important;
+    }
+
+    .stSlider > div > div > div > div {
+        color: #333 !important;
+    }
+
+    /* Beautiful button styling */
+    .stButton > button {
+        background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+        border: none;
+        border-radius: 25px;
+        padding: 1rem 2rem;
+        font-weight: 600;
+        color: white;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .stButton > button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
+    }
+
+    /* Progress bar styling */
+    .stProgress > div > div > div {
+        background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
+        border-radius: 10px;
+        animation: progressGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes progressGlow {
+        0%, 100% { box-shadow: 0 0 5px rgba(255,107,107,0.5); }
+        50% { box-shadow: 0 0 20px rgba(78,205,196,0.8); }
+    }
+
+    /* Scroll-triggered animations */
+    .stMarkdown, .stColumns, .stSelectbox, .stButton, .stSlider, .stMetric, .stProgress, .stAlert, .stCodeBlock, .stImage, .stPlotlyChart {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.8s ease-out;
+    }
+
+    /* Elements that should be visible by default */
+    .stMarkdown:first-child, .stMarkdown:nth-child(2), .stMarkdown:nth-child(3),
+    .stColumns:first-child, .stColumns:nth-child(2) {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Animation classes for scroll-triggered effects */
+    .stMarkdown.animate, .stColumns.animate, .stSelectbox.animate, .stButton.animate, .stSlider.animate, .stMetric.animate, .stProgress.animate, .stAlert.animate, .stCodeBlock.animate, .stImage.animate, .stPlotlyChart.animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Success and warning message animations */
+    .stAlert {
+        animation: bounceIn 0.6s ease-out;
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Code block styling */
+    .stCodeBlock {
+        background: rgba(0,0,0,0.8);
+        border-radius: 15px;
+        border: 1px solid rgba(255,255,255,0.2);
+        font-family: 'JetBrains Mono', monospace;
+        animation: slideInFromBottom 0.8s ease-out;
+    }
+
+    /* Matplotlib figure animations */
+    .stPlotlyChart, .stImage {
+        animation: zoomIn 0.8s ease-out;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    @keyframes zoomIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Quantum-themed decorative elements */
+    .quantum-particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #4ECDC4;
+        border-radius: 50%;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    @keyframes pulse {
+        0%, 100% { 
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(78,205,196,0.7);
+        }
+        50% { 
+            transform: scale(1.02);
+            box-shadow: 0 0 0 10px rgba(78,205,196,0);
+        }
+    }
+
+    /* Enhanced typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+
+    p, li {
+        line-height: 1.6;
+        color: rgba(255,255,255,0.9);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .main .block-container h1 {
+            font-size: 2.5rem;
+        }
         
-        # Load external JS file
+        .sidebar .sidebar-content {
+            margin: 0.5rem;
+            padding: 1rem;
+        }
+    }
+
+    /* Layout fixes for better positioning */
+    @media (min-width: 769px) {
+        .main .block-container {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+        
+        .sidebar .sidebar-content {
+            margin: 1rem;
+            padding: 2rem;
+        }
+    }
+
+    /* Additional layout fixes */
+    .main {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Ensure proper spacing between sidebar and main content */
+    @media (min-width: 769px) {
+        .main .block-container {
+            margin-left: 0;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Algorithm section animations */
+    .algorithm-section {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 1s ease-out;
+    }
+
+    .algorithm-section.animate {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Add some scroll animations for specific elements */
+    .stMarkdown:nth-child(n+4), .stColumns:nth-child(n+3) {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Hover animations for interactive elements */
+    .stButton:hover, .stSelectbox:hover, .stSlider:hover {
+        transform: translateY(-2px);
+        transition: transform 0.3s ease;
+    }
+    """
+    
+    # Apply the CSS
+    st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
+    
+    # Try to load external JS file, but don't fail if not found
+    try:
         with open('static/animations.js', 'r') as f:
             js_content = f.read()
         st.markdown(f'<script>{js_content}</script>', unsafe_allow_html=True)
-        
     except FileNotFoundError:
-        # Fallback to embedded CSS if external files not found
-        st.markdown("""
-        <style>
-        /* Import Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
-        /* Global Styles */
-        * {
-            font-family: 'Inter', sans-serif;
+        # Use embedded JavaScript if external file not found
+        js_content = """
+        // Simple scroll animation system
+        function addScrollAnimations() {
+            try {
+                const elements = document.querySelectorAll('.stMarkdown, .stColumns, .stSelectbox, .stButton, .stSlider');
+                
+                elements.forEach((el, index) => {
+                    if (!el.classList.contains('animated')) {
+                        el.classList.add('animated');
+                        el.style.opacity = '0';
+                        el.style.transform = 'translateY(30px)';
+                        el.style.transition = 'all 0.8s ease-out';
+                        
+                        // Add animation with delay
+                        setTimeout(() => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            } catch (error) {
+                console.log('Animation error:', error);
+            }
         }
-
-        /* Beautiful gradient background */
-        .main .block-container {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 2rem 0;
+        
+        // Run animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(addScrollAnimations, 500);
+        });
+        
+        // Run animations on scroll
+        window.addEventListener('scroll', () => {
+            setTimeout(addScrollAnimations, 100);
+        });
+        
+        // Initial run
+        setTimeout(addScrollAnimations, 1000);
+        
+        // Algorithm button selection
+        function setupAlgorithmButtons() {
+            const buttons = document.querySelectorAll('.algorithm-button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove selected class from all buttons
+                    buttons.forEach(btn => btn.classList.remove('selected'));
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                });
+            });
         }
+        
+        // Setup algorithm buttons when DOM is ready
+        document.addEventListener('DOMContentLoaded', setupAlgorithmButtons);
+        """
+        st.markdown(f'<script>{js_content}</script>', unsafe_allow_html=True)
 
-/* Animated header with slide-in effect */
-.main .block-container h1 {
-    background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 3.5rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem;
-    animation: gradientShift 3s ease-in-out infinite, slideInFromTop 1s ease-out;
-}
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes slideInFromTop {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Animated subtitle */
-.main .block-container h3 {
-    color: #ffffff;
-    text-align: center;
-    font-weight: 400;
-    margin-bottom: 3rem;
-    animation: slideInFromBottom 1s ease-out 0.3s both;
-}
-
-@keyframes slideInFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Beautiful card containers with animations */
-.stSelectbox, .stButton, .stSlider, .stMarkdown {
-    animation: slideInFromLeft 0.8s ease-out;
-    animation-fill-mode: both;
-}
-
-.stSelectbox:nth-child(1) { animation-delay: 0.1s; }
-.stSelectbox:nth-child(2) { animation-delay: 0.2s; }
-.stSelectbox:nth-child(3) { animation-delay: 0.3s; }
-.stButton { animation-delay: 0.4s; }
-
-@keyframes slideInFromLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Sidebar animations */
-.sidebar .sidebar-content {
-    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 2rem;
-    margin: 1rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    animation: slideInFromRight 1s ease-out;
-}
-
-@keyframes slideInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Enhanced selectbox styling */
-.stSelectbox > div > div {
-    background: rgba(255,255,255,0.9);
-    border-radius: 15px;
-    border: 2px solid rgba(255,255,255,0.3);
-    transition: all 0.3s ease;
-}
-
-.stSelectbox > div > div:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    border-color: #4ECDC4;
-}
-
-/* Fix dropdown text color */
-.stSelectbox > div > div > div {
-    color: #333 !important;
-    background: rgba(255,255,255,0.95) !important;
-}
-
-.stSelectbox > div > div > div > div {
-    color: #333 !important;
-    background: rgba(255,255,255,0.95) !important;
-}
-
-/* Fix dropdown options */
-.stSelectbox > div > div > div > div > div {
-    color: #333 !important;
-    background: rgba(255,255,255,0.95) !important;
-}
-
-.stSelectbox > div > div > div > div > div:hover {
-    background: rgba(78,205,196,0.2) !important;
-    color: #333 !important;
-}
-
-/* Fix slider text */
-.stSlider > div > div > div {
-    color: #333 !important;
-}
-
-.stSlider > div > div > div > div {
-    color: #333 !important;
-}
-
-/* Beautiful button styling */
-.stButton > button {
-    background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-    border: none;
-    border-radius: 25px;
-    padding: 1rem 2rem;
-    font-weight: 600;
-    color: white;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.stButton > button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
-}
-
-/* Progress bar styling */
-.stProgress > div > div > div {
-    background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1);
     border-radius: 10px;
     animation: progressGlow 2s ease-in-out infinite;
 }
