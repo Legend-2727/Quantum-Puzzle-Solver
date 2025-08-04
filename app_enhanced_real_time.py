@@ -84,10 +84,7 @@ def load_external_files():
 
     /* Ensure proper background rendering */
     html, body {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #1a1a2e !important;
         min-height: 100vh;
         margin: 0;
         padding: 0;
@@ -95,44 +92,29 @@ def load_external_files():
 
     /* Streamlit specific background fixes */
     #root {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #1a1a2e !important;
         min-height: 100vh;
     }
 
     /* Additional Streamlit deployment fixes */
     .stApp {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #1a1a2e !important;
         min-height: 100vh;
     }
 
     /* Force background on all Streamlit containers */
     .stApp > div {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #1a1a2e !important;
     }
 
     /* Override any default Streamlit backgrounds */
     [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #1a1a2e !important;
     }
 
-    /* Beautiful gradient background */
+    /* Beautiful dark background */
     .main .block-container {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #1a1a2e !important;
         min-height: 100vh;
         padding: 2rem 0;
         margin-left: auto;
@@ -144,19 +126,7 @@ def load_external_files():
     .main .block-container,
     .main .block-container > div,
     .main .block-container > div > div {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    }
-
-    /* Fallback for older browsers */
-    @supports not (background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)) {
-        .main .block-container,
-        .main .block-container > div,
-        .main .block-container > div > div {
-            background: #667eea !important;
-        }
+        background: #1a1a2e !important;
     }
 
     /* Animated header with slide-in effect */
@@ -653,7 +623,7 @@ def load_external_files():
         
         // Force background application for deployment
         function forceBackground() {
-            const gradient = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            const darkBackground = '#1a1a2e';
             const elements = [
                 document.body,
                 document.documentElement,
@@ -665,8 +635,8 @@ def load_external_files():
             
             elements.forEach(el => {
                 if (el) {
-                    el.style.background = gradient;
-                    el.style.backgroundImage = gradient;
+                    el.style.background = darkBackground;
+                    el.style.backgroundColor = darkBackground;
                     el.style.minHeight = '100vh';
                 }
             });
