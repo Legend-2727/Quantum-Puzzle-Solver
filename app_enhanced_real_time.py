@@ -70,23 +70,37 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for beautiful animations and modern styling
-st.markdown("""
-<style>
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+# Function to load external CSS and JS files
+def load_external_files():
+    try:
+        # Load external CSS file
+        with open('static/styles.css', 'r') as f:
+            css_content = f.read()
+        st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
+        
+        # Load external JS file
+        with open('static/animations.js', 'r') as f:
+            js_content = f.read()
+        st.markdown(f'<script>{js_content}</script>', unsafe_allow_html=True)
+        
+    except FileNotFoundError:
+        # Fallback to embedded CSS if external files not found
+        st.markdown("""
+        <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* Global Styles */
-* {
-    font-family: 'Inter', sans-serif;
-}
+        /* Global Styles */
+        * {
+            font-family: 'Inter', sans-serif;
+        }
 
-/* Beautiful gradient background */
-.main .block-container {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 2rem 0;
-}
+        /* Beautiful gradient background */
+        .main .block-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
 
 /* Animated header with slide-in effect */
 .main .block-container h1 {
@@ -648,6 +662,9 @@ def simulate_quantum_search(n, shots=1000):
     return result, intermediate_states
 
 def main():
+    # Load external CSS and JS files
+    load_external_files()
+    
     # Add quantum particles animation
     st.markdown("""
     <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;">

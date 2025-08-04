@@ -6,14 +6,44 @@
     font-family: 'Inter', sans-serif;
 }
 
+/* Ensure proper background rendering */
+html, body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Streamlit specific background fixes */
+#root {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
 /* Beautiful gradient background */
 .main .block-container {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -webkit-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -moz-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: -o-linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     padding: 2rem 0;
     margin-left: auto;
     margin-right: auto;
     max-width: none;
+}
+
+/* Fallback for older browsers */
+@supports not (background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)) {
+    .main .block-container {
+        background: #667eea;
+    }
 }
 
 /* Animated header with slide-in effect */
