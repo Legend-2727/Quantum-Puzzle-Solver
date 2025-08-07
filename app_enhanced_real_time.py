@@ -1513,7 +1513,7 @@ def main():
     </script>
     """, unsafe_allow_html=True)
     
-    # Animated header with colorful wavy styling and proper z-index
+    # Animated header with colorful wavy styling and crisp text
     st.markdown("""
     <div style="
         text-align: center; 
@@ -1522,43 +1522,43 @@ def main():
         position: relative; 
         z-index: 100;
         background: linear-gradient(135deg, 
-            rgba(255,107,107,0.2) 0%, 
-            rgba(78,205,196,0.2) 25%, 
-            rgba(69,183,209,0.2) 50%, 
-            rgba(150,206,180,0.2) 75%, 
-            rgba(255,107,107,0.2) 100%);
+            rgba(255,107,107,0.15) 0%, 
+            rgba(78,205,196,0.15) 25%, 
+            rgba(69,183,209,0.15) 50%, 
+            rgba(150,206,180,0.15) 75%, 
+            rgba(255,107,107,0.15) 100%);
         background-size: 400% 400%;
         animation: gradientWave 6s ease infinite;
         border-radius: 20px;
-        border: 2px solid rgba(255,255,255,0.3);
-        box-shadow: 0 0 30px rgba(78,205,196,0.3);
+        border: 2px solid rgba(255,255,255,0.2);
+        box-shadow: 0 0 30px rgba(78,205,196,0.2);
     ">
         <h1 style="
             margin-bottom: 1.5rem; 
             font-size: 3.5rem; 
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FF6B6B);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: textGradientWave 4s ease infinite;
-            text-shadow: 0 0 20px rgba(78,205,196,0.5);
+            color: #FFFFFF;
+            text-shadow: 
+                0 0 10px rgba(78,205,196,0.8),
+                0 0 20px rgba(255,107,107,0.6),
+                0 0 30px rgba(69,183,209,0.4),
+                2px 2px 4px rgba(0,0,0,0.3);
             position: relative;
             z-index: 101;
             font-weight: bold;
+            animation: textGlow 3s ease infinite;
         ">⚛️ Quantum Playground</h1>
         <h3 style="
-            background: linear-gradient(90deg, #FFFFFF, #4ECDC4, #45B7D1, #FFFFFF);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: subtitleWave 3s ease infinite;
+            color: #FFFFFF;
+            text-shadow: 
+                0 0 8px rgba(78,205,196,0.7),
+                0 0 16px rgba(255,107,107,0.5),
+                1px 1px 2px rgba(0,0,0,0.2);
             font-weight: 400; 
             margin-bottom: 2rem;
             font-size: 1.4rem;
             position: relative;
             z-index: 101;
+            animation: subtitleGlow 4s ease infinite;
         ">
             Explore the Future of Computing with Interactive Quantum Algorithms
         </h3>
@@ -1583,16 +1583,49 @@ def main():
         100% { background-position: 0% 50%; }
     }
     
-    @keyframes textGradientWave {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    @keyframes textGlow {
+        0% { 
+            text-shadow: 
+                0 0 10px rgba(78,205,196,0.8),
+                0 0 20px rgba(255,107,107,0.6),
+                0 0 30px rgba(69,183,209,0.4),
+                2px 2px 4px rgba(0,0,0,0.3);
+        }
+        50% { 
+            text-shadow: 
+                0 0 15px rgba(255,107,107,0.9),
+                0 0 25px rgba(78,205,196,0.7),
+                0 0 35px rgba(150,206,180,0.5),
+                2px 2px 4px rgba(0,0,0,0.3);
+        }
+        100% { 
+            text-shadow: 
+                0 0 10px rgba(78,205,196,0.8),
+                0 0 20px rgba(255,107,107,0.6),
+                0 0 30px rgba(69,183,209,0.4),
+                2px 2px 4px rgba(0,0,0,0.3);
+        }
     }
     
-    @keyframes subtitleWave {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    @keyframes subtitleGlow {
+        0% { 
+            text-shadow: 
+                0 0 8px rgba(78,205,196,0.7),
+                0 0 16px rgba(255,107,107,0.5),
+                1px 1px 2px rgba(0,0,0,0.2);
+        }
+        50% { 
+            text-shadow: 
+                0 0 12px rgba(69,183,209,0.8),
+                0 0 20px rgba(150,206,180,0.6),
+                1px 1px 2px rgba(0,0,0,0.2);
+        }
+        100% { 
+            text-shadow: 
+                0 0 8px rgba(78,205,196,0.7),
+                0 0 16px rgba(255,107,107,0.5),
+                1px 1px 2px rgba(0,0,0,0.2);
+        }
     }
     
     @keyframes lineWave {
