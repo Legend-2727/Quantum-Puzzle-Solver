@@ -1018,9 +1018,12 @@ def render_interactive_qubits(algorithm_name="Quantum", qubit_count=3):
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    margin: 2rem 0;
+                    margin: 3rem 0;
+                    padding: 1rem 0;
                     perspective: 1000px;
-                    overflow: hidden;
+                    overflow: visible;
+                    z-index: 50;
+                    clear: both;
                 }}
 
                 .qubit {{
@@ -1102,8 +1105,12 @@ def render_interactive_qubits(algorithm_name="Quantum", qubit_count=3):
                     text-align: center;
                     color: rgba(255,255,255,0.8);
                     font-size: 14px;
-                    margin-top: 1rem;
+                    margin: 2rem 0;
+                    padding: 1rem;
                     animation: fadeIn 2s ease-in;
+                    position: relative;
+                    z-index: 49;
+                    clear: both;
                 }}
 
                 @keyframes fadeIn {{
@@ -1468,19 +1475,55 @@ def main():
     </script>
     """, unsafe_allow_html=True)
     
-    # Animated header with enhanced styling
+    # Animated header with enhanced styling and proper z-index
     st.markdown("""
-    <div style="text-align: center; margin-bottom: 3rem;">
-        <h1 style="margin-bottom: 1rem;">⚛️ Quantum Playground</h1>
-        <h3 style="color: rgba(255,255,255,0.9); font-weight: 300; margin-bottom: 2rem;">
+    <div style="
+        text-align: center; 
+        margin: 2rem 0 4rem 0; 
+        padding: 2rem 0; 
+        position: relative; 
+        z-index: 100;
+        background: rgba(0,0,0,0.1);
+        border-radius: 10px;
+    ">
+        <h1 style="
+            margin-bottom: 1rem; 
+            font-size: 3rem; 
+            color: #FFFFFF; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 101;
+        ">⚛️ Quantum Playground</h1>
+        <h3 style="
+            color: rgba(255,255,255,0.9); 
+            font-weight: 300; 
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 101;
+        ">
             Explore the Future of Computing with Interactive Quantum Algorithms
         </h3>
-        <div style="width: 100px; height: 3px; background: linear-gradient(45deg, #FF6B6B, #4ECDC4); margin: 0 auto; border-radius: 2px;"></div>
+        <div style="
+            width: 100px; 
+            height: 3px; 
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4); 
+            margin: 0 auto; 
+            border-radius: 2px;
+            position: relative;
+            z-index: 101;
+        "></div>
     </div>
     """, unsafe_allow_html=True)
     
-    # Add interactive qubits to the main page
+    # Add interactive qubits to the main page with proper spacing
     render_interactive_qubits("Quantum", 3)
+    
+    # Add spacing after qubits
+    st.markdown("""
+    <div style="height: 2rem; clear: both;"></div>
+    """, unsafe_allow_html=True)
     
     # Enhanced problem selection with beautiful cards
     st.markdown("""
