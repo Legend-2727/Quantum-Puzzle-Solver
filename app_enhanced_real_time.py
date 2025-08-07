@@ -1422,15 +1422,53 @@ def main():
     # Load external CSS and JS files
     load_external_files()
     
-    # Add quantum particles animation
+    # Add quantum particles animation with colorful effects
     st.markdown("""
     <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;">
-        <div class="quantum-particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
-        <div class="quantum-particle" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
-        <div class="quantum-particle" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
-        <div class="quantum-particle" style="top: 80%; left: 70%; animation-delay: 0.5s;"></div>
-        <div class="quantum-particle" style="top: 40%; left: 90%; animation-delay: 1.5s;"></div>
+        <div class="quantum-particle colorful" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="quantum-particle colorful" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+        <div class="quantum-particle colorful" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+        <div class="quantum-particle colorful" style="top: 80%; left: 70%; animation-delay: 0.5s;"></div>
+        <div class="quantum-particle colorful" style="top: 40%; left: 90%; animation-delay: 1.5s;"></div>
+        <div class="quantum-particle colorful" style="top: 15%; left: 50%; animation-delay: 2.5s;"></div>
+        <div class="quantum-particle colorful" style="top: 70%; left: 45%; animation-delay: 3s;"></div>
+        <div class="quantum-particle colorful" style="top: 30%; left: 5%; animation-delay: 1.8s;"></div>
     </div>
+    
+    <style>
+    .quantum-particle.colorful {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+        background-size: 300% 300%;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: float-colorful 4s ease-in-out infinite, particle-gradient 3s ease infinite;
+        box-shadow: 0 0 15px rgba(78,205,196,0.6);
+    }
+    
+    @keyframes float-colorful {
+        0%, 100% { 
+            transform: translateY(0px) translateX(0px) scale(1); 
+        }
+        25% { 
+            transform: translateY(-20px) translateX(10px) scale(1.2); 
+        }
+        50% { 
+            transform: translateY(-15px) translateX(-5px) scale(0.8); 
+        }
+        75% { 
+            transform: translateY(-25px) translateX(15px) scale(1.1); 
+        }
+    }
+    
+    @keyframes particle-gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    </style>
     """, unsafe_allow_html=True)
     
     # Add simple scroll-triggered animation JavaScript
@@ -1475,46 +1513,103 @@ def main():
     </script>
     """, unsafe_allow_html=True)
     
-    # Animated header with enhanced styling and proper z-index
+    # Animated header with colorful wavy styling and proper z-index
     st.markdown("""
     <div style="
         text-align: center; 
         margin: 2rem 0 4rem 0; 
-        padding: 2rem 0; 
+        padding: 3rem 0; 
         position: relative; 
         z-index: 100;
-        background: rgba(0,0,0,0.1);
-        border-radius: 10px;
+        background: linear-gradient(135deg, 
+            rgba(255,107,107,0.2) 0%, 
+            rgba(78,205,196,0.2) 25%, 
+            rgba(69,183,209,0.2) 50%, 
+            rgba(150,206,180,0.2) 75%, 
+            rgba(255,107,107,0.2) 100%);
+        background-size: 400% 400%;
+        animation: gradientWave 6s ease infinite;
+        border-radius: 20px;
+        border: 2px solid rgba(255,255,255,0.3);
+        box-shadow: 0 0 30px rgba(78,205,196,0.3);
     ">
         <h1 style="
-            margin-bottom: 1rem; 
-            font-size: 3rem; 
-            color: #FFFFFF; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 1.5rem; 
+            font-size: 3.5rem; 
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FF6B6B);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGradientWave 4s ease infinite;
+            text-shadow: 0 0 20px rgba(78,205,196,0.5);
             position: relative;
             z-index: 101;
+            font-weight: bold;
         ">⚛️ Quantum Playground</h1>
         <h3 style="
-            color: rgba(255,255,255,0.9); 
-            font-weight: 300; 
+            background: linear-gradient(90deg, #FFFFFF, #4ECDC4, #45B7D1, #FFFFFF);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: subtitleWave 3s ease infinite;
+            font-weight: 400; 
             margin-bottom: 2rem;
-            font-size: 1.3rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-size: 1.4rem;
             position: relative;
             z-index: 101;
         ">
             Explore the Future of Computing with Interactive Quantum Algorithms
         </h3>
         <div style="
-            width: 100px; 
-            height: 3px; 
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4); 
+            width: 200px; 
+            height: 4px; 
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FF6B6B); 
+            background-size: 300% 300%;
             margin: 0 auto; 
-            border-radius: 2px;
+            border-radius: 10px;
             position: relative;
             z-index: 101;
+            animation: lineWave 2s ease infinite;
+            box-shadow: 0 0 15px rgba(78,205,196,0.7);
         "></div>
     </div>
+    
+    <style>
+    @keyframes gradientWave {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes textGradientWave {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes subtitleWave {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes lineWave {
+        0% { 
+            background-position: 0% 50%; 
+            transform: scaleX(1);
+        }
+        50% { 
+            background-position: 100% 50%; 
+            transform: scaleX(1.1);
+        }
+        100% { 
+            background-position: 0% 50%; 
+            transform: scaleX(1);
+        }
+    }
+    </style>
     """, unsafe_allow_html=True)
     
     # Add interactive qubits to the main page with proper spacing
