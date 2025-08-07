@@ -1419,6 +1419,75 @@ def simulate_quantum_search(n, shots=1000):
     return result, intermediate_states
 
 def main():
+    # 🚀 FIRST THING - RENDER HEADER BEFORE ANYTHING ELSE!
+    st.markdown("""
+    <div class="top-level-header">
+        <h1 class="super-clear-title">⚛️ Quantum Playground</h1>
+        <h3 class="super-clear-subtitle">🚀 Explore the Future of Computing with Interactive Quantum Algorithms</h3>
+        <div class="super-clear-divider"></div>
+    </div>
+    
+    <style>
+    .top-level-header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 999999 !important;
+        width: 100vw !important;
+        text-align: center !important;
+        padding: 2rem !important;
+        background: linear-gradient(135deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4) !important;
+        background-size: 400% 400% !important;
+        animation: mega-wave 6s ease infinite !important;
+        border-bottom: 3px solid #FFFFFF !important;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.3) !important;
+        margin: 0 !important;
+    }
+    
+    .super-clear-title {
+        font-size: 3.5rem !important;
+        color: #FFFFFF !important;
+        font-weight: 900 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+        font-family: 'Arial Black', Arial, sans-serif !important;
+        letter-spacing: 2px !important;
+    }
+    
+    .super-clear-subtitle {
+        font-size: 1.4rem !important;
+        color: #FFFFFF !important;
+        font-weight: 600 !important;
+        margin: 0.5rem 0 1rem 0 !important;
+        padding: 0 !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+        font-family: Arial, sans-serif !important;
+    }
+    
+    .super-clear-divider {
+        width: 200px !important;
+        height: 4px !important;
+        background: #FFFFFF !important;
+        margin: 0 auto !important;
+        border-radius: 10px !important;
+        box-shadow: 0 0 10px rgba(255,255,255,0.8) !important;
+    }
+    
+    @keyframes mega-wave {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* Push main content down */
+    .main .block-container {
+        padding-top: 180px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     # Load external CSS and JS files
     load_external_files()
     
@@ -1511,139 +1580,6 @@ def main():
     // Initial run
     setTimeout(addScrollAnimations, 1000);
     </script>
-    """, unsafe_allow_html=True)
-    
-    # ✨ ISOLATED CRYSTAL CLEAR HEADER - Completely Separate!
-    st.markdown("""
-    <div class="isolated-header-wrapper">
-        <div class="crystal-clear-header">
-            <h1 class="crystal-title">⚛️ Quantum Playground</h1>
-            <h3 class="crystal-subtitle">🚀 Explore the Future of Computing with Interactive Quantum Algorithms</h3>
-            <div class="crystal-divider"></div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Separate CSS block for maximum isolation
-    st.markdown("""
-    <style>
-    /* COMPLETELY ISOLATED HEADER STYLES */
-    .isolated-header-wrapper {
-        position: relative !important;
-        z-index: 9999 !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: none !important;
-        border: none !important;
-        box-shadow: none !important;
-        backdrop-filter: none !important;
-        filter: none !important;
-    }
-    
-    .crystal-clear-header {
-        text-align: center !important;
-        margin: 2rem auto !important;
-        padding: 3rem 2rem !important;
-        max-width: 90% !important;
-        background: linear-gradient(135deg, 
-            #FF6B6B 0%, 
-            #4ECDC4 25%, 
-            #45B7D1 50%, 
-            #96CEB4 75%, 
-            #FF6B6B 100%) !important;
-        background-size: 400% 400% !important;
-        animation: crystal-wave 6s ease infinite !important;
-        border-radius: 20px !important;
-        border: 2px solid #FFFFFF !important;
-        box-shadow: 0 0 30px rgba(78,205,196,0.6) !important;
-        position: relative !important;
-        z-index: 10000 !important;
-        backdrop-filter: none !important;
-        filter: none !important;
-    }
-    
-    .crystal-title {
-        font-size: 4rem !important;
-        color: #FFFFFF !important;
-        font-weight: 900 !important;
-        margin: 0 0 1rem 0 !important;
-        padding: 0 !important;
-        text-shadow: none !important;
-        background: none !important;
-        border: none !important;
-        text-rendering: optimizeLegibility !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
-        letter-spacing: 1px !important;
-        line-height: 1.2 !important;
-        backdrop-filter: none !important;
-        filter: none !important;
-    }
-    
-    .crystal-subtitle {
-        font-size: 1.6rem !important;
-        color: #FFFFFF !important;
-        font-weight: 500 !important;
-        margin: 0 0 2rem 0 !important;
-        padding: 0 !important;
-        opacity: 1 !important;
-        text-shadow: none !important;
-        background: none !important;
-        border: none !important;
-        text-rendering: optimizeLegibility !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
-        line-height: 1.4 !important;
-        backdrop-filter: none !important;
-        filter: none !important;
-    }
-    
-    .crystal-divider {
-        width: 250px !important;
-        height: 4px !important;
-        background: linear-gradient(90deg, #FFD700, #00FFFF, #FF69B4, #FFD700) !important;
-        background-size: 200% 200% !important;
-        margin: 0 auto !important;
-        border-radius: 10px !important;
-        animation: crystal-flow 3s linear infinite !important;
-        box-shadow: 0 0 15px rgba(255,255,255,0.6) !important;
-        backdrop-filter: none !important;
-        filter: none !important;
-    }
-    
-    @keyframes crystal-wave {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    @keyframes crystal-flow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    /* Override ANY possible interference */
-    .isolated-header-wrapper * {
-        backdrop-filter: none !important;
-        filter: none !important;
-        text-shadow: none !important;
-    }
-    
-    .crystal-clear-header:hover {
-        transform: scale(1.02) !important;
-        transition: transform 0.3s ease !important;
-    }
-    
-    /* Force clear rendering */
-    .crystal-title, .crystal-subtitle {
-        transform: translateZ(0) !important;
-        will-change: auto !important;
-    }
-    </style>
     """, unsafe_allow_html=True)
     
     # Add interactive qubits to the main page with proper spacing
