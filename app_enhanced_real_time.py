@@ -1513,93 +1513,137 @@ def main():
     </script>
     """, unsafe_allow_html=True)
     
-    # ✨ CLEAN & BEAUTIFUL ANIMATED HEADER
+    # ✨ ISOLATED CRYSTAL CLEAR HEADER - Completely Separate!
+    st.markdown("""
+    <div class="isolated-header-wrapper">
+        <div class="crystal-clear-header">
+            <h1 class="crystal-title">⚛️ Quantum Playground</h1>
+            <h3 class="crystal-subtitle">🚀 Explore the Future of Computing with Interactive Quantum Algorithms</h3>
+            <div class="crystal-divider"></div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Separate CSS block for maximum isolation
     st.markdown("""
     <style>
-    .main-header {
-        text-align: center;
-        margin: 2rem 0 3rem 0;
-        padding: 3rem 2rem;
+    /* COMPLETELY ISOLATED HEADER STYLES */
+    .isolated-header-wrapper {
+        position: relative !important;
+        z-index: 9999 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        filter: none !important;
+    }
+    
+    .crystal-clear-header {
+        text-align: center !important;
+        margin: 2rem auto !important;
+        padding: 3rem 2rem !important;
+        max-width: 90% !important;
         background: linear-gradient(135deg, 
-            rgba(255,107,107,0.9), 
-            rgba(78,205,196,0.9), 
-            rgba(69,183,209,0.9), 
-            rgba(150,206,180,0.9));
-        background-size: 400% 400%;
-        animation: gradient-wave 6s ease infinite;
-        border-radius: 20px;
-        border: 2px solid rgba(255,255,255,0.4);
-        box-shadow: 0 0 30px rgba(78,205,196,0.5);
-        position: relative;
-        z-index: 100;
+            #FF6B6B 0%, 
+            #4ECDC4 25%, 
+            #45B7D1 50%, 
+            #96CEB4 75%, 
+            #FF6B6B 100%) !important;
+        background-size: 400% 400% !important;
+        animation: crystal-wave 6s ease infinite !important;
+        border-radius: 20px !important;
+        border: 2px solid #FFFFFF !important;
+        box-shadow: 0 0 30px rgba(78,205,196,0.6) !important;
+        position: relative !important;
+        z-index: 10000 !important;
+        backdrop-filter: none !important;
+        filter: none !important;
     }
     
-    .main-title {
-        font-size: 4rem;
-        color: #FFFFFF;
-        font-weight: 900;
-        margin-bottom: 1rem;
-        text-shadow: 0 0 20px rgba(255,255,255,0.8);
-        animation: title-glow 3s ease-in-out infinite alternate;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
+    .crystal-title {
+        font-size: 4rem !important;
+        color: #FFFFFF !important;
+        font-weight: 900 !important;
+        margin: 0 0 1rem 0 !important;
+        padding: 0 !important;
+        text-shadow: none !important;
+        background: none !important;
+        border: none !important;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+        letter-spacing: 1px !important;
+        line-height: 1.2 !important;
+        backdrop-filter: none !important;
+        filter: none !important;
     }
     
-    .main-subtitle {
-        font-size: 1.6rem;
-        color: #FFFFFF;
-        font-weight: 500;
-        margin-bottom: 2rem;
-        opacity: 0.95;
-        animation: subtitle-float 4s ease-in-out infinite;
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
+    .crystal-subtitle {
+        font-size: 1.6rem !important;
+        color: #FFFFFF !important;
+        font-weight: 500 !important;
+        margin: 0 0 2rem 0 !important;
+        padding: 0 !important;
+        opacity: 1 !important;
+        text-shadow: none !important;
+        background: none !important;
+        border: none !important;
+        text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+        line-height: 1.4 !important;
+        backdrop-filter: none !important;
+        filter: none !important;
     }
     
-    .rainbow-line {
-        width: 250px;
-        height: 4px;
-        background: linear-gradient(90deg, #FFD700, #00FFFF, #FF69B4, #FFD700);
-        background-size: 200% 200%;
-        margin: 0 auto;
-        border-radius: 10px;
-        animation: rainbow-flow 3s linear infinite;
-        box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    .crystal-divider {
+        width: 250px !important;
+        height: 4px !important;
+        background: linear-gradient(90deg, #FFD700, #00FFFF, #FF69B4, #FFD700) !important;
+        background-size: 200% 200% !important;
+        margin: 0 auto !important;
+        border-radius: 10px !important;
+        animation: crystal-flow 3s linear infinite !important;
+        box-shadow: 0 0 15px rgba(255,255,255,0.6) !important;
+        backdrop-filter: none !important;
+        filter: none !important;
     }
     
-    @keyframes gradient-wave {
+    @keyframes crystal-wave {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
     
-    @keyframes title-glow {
-        0% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
-        100% { text-shadow: 0 0 30px rgba(255,255,255,1), 0 0 40px rgba(78,205,196,0.8); }
-    }
-    
-    @keyframes subtitle-float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
-    }
-    
-    @keyframes rainbow-flow {
+    @keyframes crystal-flow {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
     
-    .main-header:hover {
-        transform: scale(1.02);
-        transition: transform 0.3s ease;
+    /* Override ANY possible interference */
+    .isolated-header-wrapper * {
+        backdrop-filter: none !important;
+        filter: none !important;
+        text-shadow: none !important;
+    }
+    
+    .crystal-clear-header:hover {
+        transform: scale(1.02) !important;
+        transition: transform 0.3s ease !important;
+    }
+    
+    /* Force clear rendering */
+    .crystal-title, .crystal-subtitle {
+        transform: translateZ(0) !important;
+        will-change: auto !important;
     }
     </style>
-    
-    <div class="main-header">
-        <h1 class="main-title">⚛️ Quantum Playground</h1>
-        <h3 class="main-subtitle">🚀 Explore the Future of Computing with Interactive Quantum Algorithms</h3>
-        <div class="rainbow-line"></div>
-    </div>
     """, unsafe_allow_html=True)
     
     # Add interactive qubits to the main page with proper spacing
