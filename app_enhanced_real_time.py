@@ -1513,90 +1513,327 @@ def main():
     </script>
     """, unsafe_allow_html=True)
     
-    # Animated header with crisp clear text - no blur effects
+    # 🌟 SPECTACULAR ANIMATED HEADER - Guaranteed Visibility & Beauty! 
     st.markdown("""
-    <div style="
-        text-align: center; 
-        margin: 2rem 0 4rem 0; 
-        padding: 3rem 0; 
-        position: relative; 
-        z-index: 100;
-        background: linear-gradient(135deg, 
-            rgba(255,107,107,0.1) 0%, 
-            rgba(78,205,196,0.1) 25%, 
-            rgba(69,183,209,0.1) 50%, 
-            rgba(150,206,180,0.1) 75%, 
-            rgba(255,107,107,0.1) 100%);
-        background-size: 400% 400%;
-        animation: gradientWave 6s ease infinite;
-        border-radius: 20px;
-        border: 2px solid rgba(78,205,196,0.3);
-        box-shadow: 0 0 20px rgba(78,205,196,0.15);
+    <div class="quantum-header-container" style="
+        position: relative;
+        width: 100%;
+        margin: 0 0 3rem 0;
+        padding: 0;
+        overflow: visible;
+        z-index: 1000;
     ">
-        <h1 style="
-            margin-bottom: 1.5rem; 
-            font-size: 3.5rem; 
-            color: #FFFFFF;
-            font-weight: bold;
-            position: relative;
-            z-index: 101;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        ">⚛️ Quantum Playground</h1>
-        <h3 style="
-            color: #E0E0E0;
-            font-weight: 400; 
-            margin-bottom: 2rem;
-            font-size: 1.4rem;
-            position: relative;
-            z-index: 101;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        <!-- Main Header Card -->
+        <div class="quantum-header-card" style="
+            text-align: center; 
+            margin: 2rem auto; 
+            padding: 4rem 2rem; 
+            max-width: 95%;
+            position: relative; 
+            z-index: 1001;
+            background: linear-gradient(135deg, 
+                rgba(255,107,107,0.95) 0%, 
+                rgba(78,205,196,0.95) 25%, 
+                rgba(69,183,209,0.95) 50%, 
+                rgba(150,206,180,0.95) 75%, 
+                rgba(255,107,107,0.95) 100%);
+            background-size: 400% 400%;
+            animation: spectacular-gradient 8s ease infinite;
+            border-radius: 25px;
+            border: 3px solid rgba(255,255,255,0.6);
+            box-shadow: 
+                0 0 40px rgba(78,205,196,0.6),
+                0 0 80px rgba(255,107,107,0.3),
+                inset 0 0 40px rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transform: perspective(1000px) rotateX(0deg);
+            transition: all 0.5s ease;
         ">
-            Explore the Future of Computing with Interactive Quantum Algorithms
-        </h3>
-        <div style="
-            width: 200px; 
-            height: 4px; 
-            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FF6B6B); 
-            background-size: 300% 300%;
-            margin: 0 auto; 
-            border-radius: 10px;
-            position: relative;
-            z-index: 101;
-            animation: lineWave 2s ease infinite;
-        "></div>
+            <!-- Animated Title -->
+            <h1 class="quantum-title" style="
+                margin-bottom: 2rem; 
+                font-size: 4.5rem; 
+                color: #FFFFFF;
+                font-weight: 900;
+                position: relative;
+                z-index: 1002;
+                text-rendering: optimizeLegibility;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                letter-spacing: 2px;
+                text-shadow: 
+                    0 0 10px rgba(255,255,255,0.8),
+                    0 0 20px rgba(78,205,196,0.6),
+                    0 0 30px rgba(255,107,107,0.4);
+                animation: title-entrance 2s ease-out, title-glow 3s ease-in-out infinite alternate;
+                transform: translateY(0);
+            ">⚛️ Quantum Playground</h1>
+            
+            <!-- Animated Subtitle -->
+            <h3 class="quantum-subtitle" style="
+                color: #FFFFFF;
+                font-weight: 500; 
+                margin-bottom: 2.5rem;
+                font-size: 1.8rem;
+                position: relative;
+                z-index: 1002;
+                text-rendering: optimizeLegibility;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                opacity: 0.95;
+                text-shadow: 0 0 15px rgba(255,255,255,0.5);
+                animation: subtitle-entrance 2s ease-out 0.5s both, subtitle-float 4s ease-in-out infinite;
+            ">
+                🚀 Explore the Future of Computing with Interactive Quantum Algorithms
+            </h3>
+            
+            <!-- Animated Decorative Line -->
+            <div class="quantum-divider" style="
+                width: 300px; 
+                height: 6px; 
+                background: linear-gradient(90deg, 
+                    #FFFFFF 0%,
+                    #FFD700 25%, 
+                    #00FFFF 50%, 
+                    #FF69B4 75%, 
+                    #FFFFFF 100%); 
+                background-size: 200% 200%;
+                margin: 0 auto; 
+                border-radius: 10px;
+                position: relative;
+                z-index: 1002;
+                animation: rainbow-flow 3s linear infinite, divider-pulse 2s ease-in-out infinite;
+                box-shadow: 
+                    0 0 15px rgba(255,255,255,0.8),
+                    0 0 25px rgba(0,255,255,0.5);
+            "></div>
+            
+            <!-- Floating Quantum Particles -->
+            <div class="quantum-particle-1" style="
+                position: absolute;
+                top: 10%;
+                left: 10%;
+                width: 12px;
+                height: 12px;
+                background: radial-gradient(circle, #FFD700, #FF6B6B);
+                border-radius: 50%;
+                animation: particle-orbit-1 6s linear infinite;
+                box-shadow: 0 0 20px rgba(255,215,0,0.8);
+            "></div>
+            
+            <div class="quantum-particle-2" style="
+                position: absolute;
+                top: 15%;
+                right: 15%;
+                width: 10px;
+                height: 10px;
+                background: radial-gradient(circle, #00FFFF, #4ECDC4);
+                border-radius: 50%;
+                animation: particle-orbit-2 8s linear infinite reverse;
+                box-shadow: 0 0 20px rgba(0,255,255,0.8);
+            "></div>
+            
+            <div class="quantum-particle-3" style="
+                position: absolute;
+                bottom: 20%;
+                left: 20%;
+                width: 8px;
+                height: 8px;
+                background: radial-gradient(circle, #FF69B4, #96CEB4);
+                border-radius: 50%;
+                animation: particle-orbit-3 10s linear infinite;
+                box-shadow: 0 0 20px rgba(255,105,180,0.8);
+            "></div>
+        </div>
     </div>
     
     <style>
-    @keyframes gradientWave {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+    /* 🌟 SPECTACULAR QUANTUM HEADER ANIMATIONS */
     
-    @keyframes lineWave {
+    @keyframes spectacular-gradient {
         0% { 
             background-position: 0% 50%; 
-            transform: scaleX(1);
+            transform: perspective(1000px) rotateX(0deg) scale(1);
+        }
+        25% { 
+            background-position: 100% 50%; 
+            transform: perspective(1000px) rotateX(2deg) scale(1.02);
         }
         50% { 
-            background-position: 100% 50%; 
-            transform: scaleX(1.1);
+            background-position: 100% 100%; 
+            transform: perspective(1000px) rotateX(0deg) scale(1);
+        }
+        75% { 
+            background-position: 0% 100%; 
+            transform: perspective(1000px) rotateX(-2deg) scale(1.02);
         }
         100% { 
             background-position: 0% 50%; 
-            transform: scaleX(1);
+            transform: perspective(1000px) rotateX(0deg) scale(1);
         }
     }
     
-    /* Ensure crisp text rendering */
-    h1, h2, h3, h4, h5, h6 {
+    @keyframes title-entrance {
+        0% { 
+            opacity: 0; 
+            transform: translateY(-50px) scale(0.8); 
+        }
+        50% { 
+            opacity: 0.7; 
+            transform: translateY(-10px) scale(1.1); 
+        }
+        100% { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
+        }
+    }
+    
+    @keyframes title-glow {
+        0% { 
+            text-shadow: 
+                0 0 10px rgba(255,255,255,0.8),
+                0 0 20px rgba(78,205,196,0.6),
+                0 0 30px rgba(255,107,107,0.4);
+        }
+        100% { 
+            text-shadow: 
+                0 0 20px rgba(255,255,255,1),
+                0 0 30px rgba(78,205,196,0.8),
+                0 0 40px rgba(255,107,107,0.6);
+        }
+    }
+    
+    @keyframes subtitle-entrance {
+        0% { 
+            opacity: 0; 
+            transform: translateY(30px); 
+        }
+        100% { 
+            opacity: 0.95; 
+            transform: translateY(0); 
+        }
+    }
+    
+    @keyframes subtitle-float {
+        0%, 100% { 
+            transform: translateY(0px); 
+        }
+        50% { 
+            transform: translateY(-8px); 
+        }
+    }
+    
+    @keyframes rainbow-flow {
+        0% { 
+            background-position: 0% 50%; 
+        }
+        50% { 
+            background-position: 100% 50%; 
+        }
+        100% { 
+            background-position: 0% 50%; 
+        }
+    }
+    
+    @keyframes divider-pulse {
+        0%, 100% { 
+            transform: scaleY(1) scaleX(1); 
+            opacity: 1;
+        }
+        50% { 
+            transform: scaleY(1.3) scaleX(1.1); 
+            opacity: 0.8;
+        }
+    }
+    
+    @keyframes particle-orbit-1 {
+        0% { 
+            transform: rotate(0deg) translateX(100px) rotate(0deg); 
+            opacity: 1;
+        }
+        50% { 
+            opacity: 0.6;
+        }
+        100% { 
+            transform: rotate(360deg) translateX(100px) rotate(-360deg); 
+            opacity: 1;
+        }
+    }
+    
+    @keyframes particle-orbit-2 {
+        0% { 
+            transform: rotate(0deg) translateX(80px) rotate(0deg); 
+            opacity: 1;
+        }
+        50% { 
+            opacity: 0.7;
+        }
+        100% { 
+            transform: rotate(360deg) translateX(80px) rotate(-360deg); 
+            opacity: 1;
+        }
+    }
+    
+    @keyframes particle-orbit-3 {
+        0% { 
+            transform: rotate(0deg) translateX(60px) rotate(0deg); 
+            opacity: 1;
+        }
+        50% { 
+            opacity: 0.5;
+        }
+        100% { 
+            transform: rotate(360deg) translateX(60px) rotate(-360deg); 
+            opacity: 1;
+        }
+    }
+    
+    /* Header hover effects */
+    .quantum-header-card:hover {
+        transform: perspective(1000px) rotateX(5deg) scale(1.03) !important;
+        box-shadow: 
+            0 0 60px rgba(78,205,196,0.8),
+            0 0 100px rgba(255,107,107,0.5),
+            inset 0 0 60px rgba(255,255,255,0.15) !important;
+    }
+    
+    .quantum-header-card:hover .quantum-title {
+        animation: title-entrance 1s ease-out, title-glow 1.5s ease-in-out infinite alternate !important;
+        transform: translateY(-5px) scale(1.05) !important;
+    }
+    
+    /* Ensure maximum visibility */
+    .quantum-header-container {
+        position: relative !important;
+        z-index: 1000 !important;
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .quantum-header-card {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    .quantum-title, .quantum-subtitle {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #FFFFFF !important;
+    }
+    
+    /* Ensure crisp text rendering globally */
+    h1, h2, h3, h4, h5, h6, .quantum-title, .quantum-subtitle {
         text-rendering: optimizeLegibility !important;
         -webkit-font-smoothing: antialiased !important;
         -moz-osx-font-smoothing: grayscale !important;
+        font-display: swap !important;
+    }
+    
+    /* Override any Streamlit hiding */
+    .stMarkdown {
+        visibility: visible !important;
     }
     </style>
     """, unsafe_allow_html=True)
